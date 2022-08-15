@@ -11,7 +11,7 @@ import com.yrol.pma.entities.Project;
 
 @Controller
 @RequestMapping("/projects")
-public class ProjectControlller {
+public class ProjectController {
 	
 	//@Autowired used for handling DI automatically
 	@Autowired
@@ -20,7 +20,7 @@ public class ProjectControlller {
 	@RequestMapping("/new")
 	public String displayProjectForm(Model model) {
 
-		// creating a project object
+		//creating a project object
 		Project project = new Project();
 
 		model.addAttribute("project", project);
@@ -29,7 +29,7 @@ public class ProjectControlller {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String createProject(Project project, Model model) {
+	public String createProject(Project project) {
 		// Saving data using ProjectRepository
 		proRepo.save(project);
 		
