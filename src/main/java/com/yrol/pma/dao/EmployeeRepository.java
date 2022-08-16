@@ -1,5 +1,7 @@
 package com.yrol.pma.dao;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.yrol.pma.entities.Employee;
@@ -11,4 +13,9 @@ import com.yrol.pma.entities.Employee;
  * */
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
+	/**
+	 * Overriding the "findAll()" of CrudRepository to return a List instead of Iterable
+	 * */
+	@Override
+	public List<Employee> findAll();
 }
