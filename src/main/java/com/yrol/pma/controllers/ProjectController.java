@@ -25,7 +25,7 @@ public class ProjectController {
 
 		model.addAttribute("project", project);
 
-		return "new-project";
+		return "/projects/new-project";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<!-- Loading the head using thymeleaf component defined inside "layout.html" -->
+<head th:replace="layouts :: head-component(page_name='Create Project')"></head>
+<body>
+
+	<!-- Loading the navbar using thymeleaf component added inside "layout.html" -->
+	<nav th:replace="layouts :: navbar-component"></nav>
+	
+	<div class="container">
+		<!-- 
+		"project" is binded in "ProjectController.java" via addAttribute Model method.
+		Binding the fields ex: project.name & etc as defined in Project entity
+		-->
+		<form action="/projects/save" th:object=${project} method="POST">
+			<input type="text" placeholder="Project Name"
+				th:field="${project.name}" /> <select th:field="${project.stage}">
+				<option th:value="NOTSTARTED">Not Started</option>
+				<option th:value="INPROGRESS">In Progress</option>
+				<option th:value="COMPLETED">Completed</option>
+			</select>
+
+			<textarea type="text" placeholder="Enter Project Description"
+				th:field="${project.description}"></textarea>
+
+			<button type="submit">Create Project</button>
+		</form>
+	</div>
+</body>
+</html>

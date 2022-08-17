@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<!-- Loading the head using thymeleaf component defined inside "layout.html" -->
+<head th:replace="layouts :: head-component(page_name='Create Employee')"></head>
+<body>
+
+	<!-- Loading the navbar using thymeleaf component added inside "layout.html" -->
+	<nav th:replace="layouts :: navbar-component"></nav>
+	
+	<div class="container">
+		<!-- 
+		"employee" is binded in "EmployeeController.java" via addAttribute Model method.
+		Binding the fields ex: employee.name & etc as defined in Employee entity
+		-->
+		<form action="/employees/save" th:object=${employee} method="POST">
+			<input type="text" placeholder="Firstname"
+				th:field="${employee.firstName}" /> <input type="text"
+				placeholder="Last name" th:field="${employee.lastName}" /> <input
+				type="text" placeholder="Email" th:field="${employee.email}" />
+
+			<button type="submit">Create Employee</button>
+		</form>
+	</div>
+</body>
+</html>
