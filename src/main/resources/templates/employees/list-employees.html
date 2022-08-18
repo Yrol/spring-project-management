@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<!-- Loading the head using thymeleaf component defined inside "layout.html" -->
+<head th:replace="layouts :: head-component(page_name='Employees')"></head>
+<body>
+
+	<!-- Loading the navbar using thymeleaf component added inside "layout.html" -->
+	<nav th:replace="layouts :: navbar-component"></nav>
+	
+	<div class="container mt-2">
+		<a th:href="@{/employees/new}" class="btn btn-primary btn-md" role="button" aria-disabled="true">Add Employees</a>
+	</div>
+	
+	<div class="container mt-2">
+		<div class="card">
+			<div class="card-body">Current Employees</div>
+		</div>
+		<!-- 	
+		<table>
+			<thead>
+				<tr>
+					<th>Project Name</th>
+					<th>Project Stage</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="project : ${projects}">
+					<td th:text="${project.name}" />
+					<td th:text="${project.stage}" />
+				</tr>
+			</tbody>
+		</table> 
+		-->
+
+		<!-- Method 1: display projects table using a common component -->
+		<table th:replace="layouts :: employees-table-component(${employees})"></table>
+	</div>
+</body>
+</html>

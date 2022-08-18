@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html>
 <!-- Loading the head using thymeleaf component defined inside "layout.html" -->
-<head th:replace="layouts :: head-component(page_name='Create Employee')"></head>
+<head
+	th:replace="layouts :: head-component(page_name='Create Employee')"></head>
 <body>
 
 	<!-- Loading the navbar using thymeleaf component added inside "layout.html" -->
 	<nav th:replace="layouts :: navbar-component"></nav>
-	
-	<div class="container">
+
+	<div class="container mt-2">
+		<div class="card">
+			<div class="card-body">Create Employee</div>
+		</div>
 		<!-- 
-		"employee" is binded in "EmployeeController.java" via addAttribute Model method.
+		"${employee}" is binded in "EmployeeController.java" via addAttribute Model method.
 		Binding the fields ex: employee.name & etc as defined in Employee entity
 		-->
 		<form action="/employees/save" th:object=${employee} method="POST">
-			<input type="text" placeholder="Firstname"
-				th:field="${employee.firstName}" /> <input type="text"
-				placeholder="Last name" th:field="${employee.lastName}" /> <input
-				type="text" placeholder="Email" th:field="${employee.email}" />
-
-			<button type="submit">Create Employee</button>
+			<div class="form-group">
+				<label for="inputFirstName">First name</label> <input type="text"
+					class="form-control" id="inputFirstName"
+					placeholder="Enter first name" th:field="${employee.firstName}">
+			</div>
+			<div class="form-group">
+				<label for="inputLastName">Last name</label> <input type="text"
+					class="form-control" id="inputLastName" placeholder="Enter last name"
+					th:field="${employee.lastName}">
+			</div>
+			<div class="form-group">
+				<label for="inputEmail">Email address</label> <input type="text"
+					class="form-control" id="inputEmail" aria-describedby="emailHelp"
+					placeholder="Enter email" th:field="${employee.email}"> <small
+					id="emailHelp" class="form-text text-muted">We'll never
+					share your email with anyone else.</small>
+			</div>
+			<button type="submit" class="btn btn-primary">Create
+				Employee</button>
 		</form>
 	</div>
 </body>

@@ -6,24 +6,39 @@
 
 	<!-- Loading the navbar using thymeleaf component added inside "layout.html" -->
 	<nav th:replace="layouts :: navbar-component"></nav>
-	
-	<div class="container">
+
+	<div class="container mt-2">
+		<div class="card">
+			<div class="card-body">Create Project</div>
+		</div>
+
 		<!-- 
-		"project" is binded in "ProjectController.java" via addAttribute Model method.
+		"${project}" is binded in "ProjectController.java" via addAttribute Model method.
 		Binding the fields ex: project.name & etc as defined in Project entity
 		-->
+
 		<form action="/projects/save" th:object=${project} method="POST">
-			<input type="text" placeholder="Project Name"
-				th:field="${project.name}" /> <select th:field="${project.stage}">
-				<option th:value="NOTSTARTED">Not Started</option>
-				<option th:value="INPROGRESS">In Progress</option>
-				<option th:value="COMPLETED">Completed</option>
-			</select>
+			<div class="form-group">
+				<label for="inputProjectName">Project name</label> <input
+					type="text" placeholder="Project Name" class="form-control"
+					id="inputProjectName" th:field="${project.name}" />
+			</div>
+			<div class="form-group">
+				<label for="projectStageSelect">Project stage</label> <select
+					class="form-control" id="projectStageSelect"
+					th:field="${project.stage}">
+					<option th:value="NOTSTARTED">Not Started</option>
+					<option th:value="INPROGRESS">In Progress</option>
+					<option th:value="COMPLETED">Completed</option>
+				</select>
+			</div>
 
-			<textarea type="text" placeholder="Enter Project Description"
-				th:field="${project.description}"></textarea>
-
-			<button type="submit">Create Project</button>
+			<div class="form-group">
+				<label for="projectDescription">Example textarea</label>
+				<textarea class="form-control" id="projectDescription" rows="3"
+					th:field="${project.description}"></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Create Project</button>
 		</form>
 	</div>
 </body>

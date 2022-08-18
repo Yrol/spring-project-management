@@ -5,41 +5,64 @@
 <head th:replace="layouts :: head-component(page_name='Home')"></head>
 <body>
 
-<!-- Loading the navbar using thymeleaf component defined inside "layout.html" -->
-<nav th:replace="layouts :: navbar-component"></nav>
+	<!-- Loading the navbar using thymeleaf component defined inside "layout.html" -->
+	<nav th:replace="layouts :: navbar-component"></nav>
 
-	<h4>Current Projects</h4>
-	<table>
-		<thead>
-			<tr>
-				<th>Project Name</th>
-				<th>Project Stage</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="project : ${projects}">
-				<td th:text="${project.name}" />
-				<td th:text="${project.stage}" />
-			</tr>
-		</tbody>
-	</table>
+	<div class="container">
+		<div class="card">
+		  <div class="card-body">
+		   Current Projects
+		  </div>
+		</div>
+		<!-- 	
+		<table>
+			<thead>
+				<tr>
+					<th>Project Name</th>
+					<th>Project Stage</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="project : ${projects}">
+					<td th:text="${project.name}" />
+					<td th:text="${project.stage}" />
+				</tr>
+			</tbody>
+		</table> 
+		-->
 
-	<h4>Current Employees</h4>
-	<table>
-		<thead>
-			<tr>
-				<th>Employee First name</th>
-				<th>Employee Last name</th>
-				<th>Employee Email</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="employee : ${employees}">
-				<td th:text="${employee.firstName}" />
-				<td th:text="${employee.lastName}" />
-				<td th:text="${employee.email}" />
-			</tr>
-		</tbody>
-	</table>
+		<!-- Method 1: display projects table using a common component -->
+		<table th:replace="layouts :: projects-table-component(${projects})"></table>
+	</div>
+
+	<div class="container">
+		<div class="card">
+		  <div class="card-body">
+		   Current Employees
+		  </div>
+		</div>
+		<!-- Method 1: display without using a common component -->
+		<!--
+		<table>
+			<thead>
+				<tr>
+					<th>Employee First name</th>
+					<th>Employee Last name</th>
+					<th>Employee Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee : ${employees}">
+					<td th:text="${employee.firstName}" />
+					<td th:text="${employee.lastName}" />
+					<td th:text="${employee.email}" />
+				</tr>
+			</tbody>
+		</table>
+		-->
+
+		<!-- Method 2: display employees table using a common component -->
+		<table th:replace="layouts :: employees-table-component(${employees})"></table>
+	</div>
 </body>
 </html>

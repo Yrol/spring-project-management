@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
 <html>
+
+<!-- Head Component -->
 <head th:fragment="head-component">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +13,8 @@
 <title th:text="${page_name}"></title>
 </head>
 
+
+<!-- Navbar Component -->
 <nav th:fragment="navbar-component"
 	class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -22,9 +26,11 @@
 
 	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Employees</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
+			<li class="nav-item"><a th:href="@{/}" class="nav-link">Home</a></li>
+			<li class="nav-item"><a th:href="@{/employees}"
+				class="nav-link">Employees</a></li>
+			<li class="nav-item"><a th:href="@{/projects}"
+				class="nav-link">Projects</a></li>
 		</ul>
 		<form class="form-inline my-2 my-lg-0">
 			<input class="form-control mr-sm-2" type="search"
@@ -33,5 +39,41 @@
 		</form>
 	</div>
 </nav>
+
+<!-- Employees table component -->
+<table class="table table-striped table-dark" th:fragment="employees-table-component(employees)">
+
+	<thead>
+		<tr>
+			<th scope="col">First name</th>
+			<th scope="col">Last name</th>
+			<th scope="col">Email</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="employee : ${employees}">
+			<td th:text="${employee.firstName}" />
+			<td th:text="${employee.lastName}" />
+			<td th:text="${employee.email}" />
+		</tr>
+	</tbody>
+</table>
+
+<!-- Projects table component -->
+<table class="table table-striped table-dark" th:fragment="projects-table-component(projects)">
+	<thead>
+		<tr>
+			<th>Project Name</th>
+			<th>Project Stage</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="project : ${projects}">
+			<td th:text="${project.name}" />
+			<td th:text="${project.stage}" />
+		</tr>
+	</tbody>
+</table>
+
 
 </html>
