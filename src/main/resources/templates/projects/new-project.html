@@ -34,9 +34,23 @@
 			</div>
 
 			<div class="form-group">
-				<label for="projectDescription">Example textarea</label>
+				<label for="projectDescription">Project description</label>
 				<textarea class="form-control" id="projectDescription" rows="3"
 					th:field="${project.description}"></textarea>
+			</div>
+			
+			<!--
+			Allowing multiple Employees to be selected for projects
+			Using *{employees} to access child Employee objects of Projects. Can also use ${project.employees}
+			 -->
+			<div class="form-group">
+			<label for="employeeSelect">Employees</label>
+			<select class="form-control" id="employeeSelect" th:field="*{employees}" multiple="multiple">
+				<option th:each = "employee: ${allEmployees}"
+						th:value = "${employee.employeeId}"
+						th:text = "${employee.firstName}">
+				</option>
+			</select>
 			</div>
 			<button type="submit" class="btn btn-primary">Create Project</button>
 		</form>
