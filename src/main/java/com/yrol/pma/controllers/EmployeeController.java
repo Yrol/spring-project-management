@@ -49,6 +49,6 @@ public class EmployeeController {
 		empRepo.save(employee);
 		
 		//redirect
-		return "redirect:/employees/new";
+		return "redirect:/employees";
 	}
 }

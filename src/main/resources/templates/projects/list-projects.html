@@ -15,6 +15,7 @@
 		<div class="card">
 			<div class="card-body">Current Projects</div>
 		</div>
+		<!-- Method 1: display projects table without using a common component -->
 		<!-- 	
 		<table>
 			<thead>
@@ -32,7 +33,7 @@
 		</table> 
 		-->
 
-		<!-- Method 1: display projects table using a common component -->
+		<!-- Method 2: display projects table using a common component -->
 		<table th:replace="layouts :: projects-table-component(${projects})"></table>
 	</div>
 </body>

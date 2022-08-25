@@ -1,5 +1,7 @@
 package com.yrol.pma.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  * Marking the Employee as an Entity. Hence, Sprint Boot will create a table in
@@ -30,7 +33,8 @@ public class Employee {
 	private String email;
 	
 	/**
-	 * ManyToOne relationship where many Employees(child) can be under one Project(Parent)
+	 * Correlates to Method 2 in Project.java
+	 * @ManyToOne relationship where many Employees(child) can be under one Project(Parent)
 	 * Using Cascade Types:
 	 * > DETACH - detach Employees when a Project gets deleted
 	 * > MERGE - merge Employees when a Projects get combined
@@ -38,18 +42,40 @@ public class Employee {
 	 * > REFRESH - if Projects get saved/updated, refresh Employees
 	 * Using FetchType LAZY instead of EAGER where it'll load only Projects(parents) without the Employees(child), and can make a separate call to load Employees when needed.
 	 * */
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
-			fetch = FetchType.LAZY)
-	@JoinColumn(name="project_id")
-	private Project theProject;
+//	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+//			fetch = FetchType.LAZY)
+//	@JoinColumn(name="project_id")
+//	private Project theProject;
 	
-	public Project getTheProject() {
-		return theProject;
+	/**
+	 * Correlates to Method 3 in Project.java 
+	 * @ManyToMany relationship where many Employees can be assigned with many projects
+	 * Using Cascading rules
+	 * */
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+	fetch = FetchType.LAZY)
+	@JoinTable(name="project_employee", joinColumns=@JoinColumn(name="employee_id"), inverseJoinColumns = @JoinColumn(name="project_id"))
+	public List<Project> theProjects;
+	
+	public List<Project> getTheProjects() {
+		return theProjects;
 	}
 
-	public void setTheProject(Project theProject) {
-		this.theProject = theProject;
+	public void setTheProjects(List<Project> theProjects) {
+		this.theProjects = theProjects;
 	}
+
+	
+	
+//	private Project theProject;
+//	
+//	public Project getTheProject() {
+//		return theProject;
+//	}
+//
+//	public void setTheProject(Project theProject) {
+//		this.theProject = theProject;
+//	}
 
 	public Employee() {
 		

@@ -2,10 +2,16 @@ package com.yrol.pma.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -31,7 +37,7 @@ public class Project {
 	private String description;
 	
 	/**
-	 *  OneToMany relationship where project(parent) can be assigned to many employees(child)
+	 *  @OneToMany relationship where project(parent) can be assigned to many employees(child)
 	 *  Will create a new table to maintain project IDs and employee IDs
 	 *  Method 1
 	 * */
@@ -39,12 +45,26 @@ public class Project {
 //	private List<Employee> employees;
 	
 	/**
-	 *  OneToMany relationship where project can be assigned to many employees
+	 *  @OneToMany relationship where project can be assigned to many employees (an employee can be assigned to only one project)
 	 *  Will create a new field in the Employee table (PROJECT_ID)
 	 *  Method 2
 	 * */
-	@OneToMany(mappedBy = "theProject")
+//	@OneToMany(mappedBy = "theProject")
+//	private List<Employee> employees;
+	
+	
+	/**
+	 *  @ManyToMany relationship where project can be assigned to many employees and vice versa
+	 *  @JoinTable Will create an intermediately join table called "project_employee"
+	 *  joinColumns will be used for defining relationship columns of both Project and Employee tables.
+	 *  Using CascadeTypes to make sure. 
+	 *  Using FetchType LAZY instead of EAGER loading.
+	 *  Method 3
+	 * */
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+	@JoinTable(name="project_employee", joinColumns =@JoinColumn(name="project_id"), inverseJoinColumns = @JoinColumn(name="employee_id"))
 	private List<Employee> employees;
+	
 
 	public List<Employee> getEmployees() {
 		return employees;
