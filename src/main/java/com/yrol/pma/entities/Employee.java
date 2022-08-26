@@ -81,9 +81,8 @@ public class Employee {
 		
 	}
 
-	public Employee(long employeeId, String firstName, String lastName, String email) {
+	public Employee(String firstName, String lastName, String email) {
 		super();
-		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

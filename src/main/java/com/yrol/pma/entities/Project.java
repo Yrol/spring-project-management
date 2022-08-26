@@ -1,5 +1,6 @@
 package com.yrol.pma.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -115,6 +116,17 @@ public class Project {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	/**
+	 * Convenience method used for seeding & etc.
+	 * Initiate the above "employees" List if not exist and add the employee
+	 * */
+	public void addEmployee(Employee emp) {
+		if(employees==null) {
+			employees = new ArrayList<>();
+		}
+		employees.add(emp);
 	}
 
 }
