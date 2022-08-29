@@ -22,10 +22,11 @@ public class Employee {
 	/**
 	 * @GeneratedValue is an annotation available within Spring to map Java objects
 	 *                 automatically to DB tables.
+	 * GenerationType.IDENTITY -  will rely on database for the next available ID
 	 * @Id annotation is used for unique ID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long employeeId;
 
 	private String firstName;
