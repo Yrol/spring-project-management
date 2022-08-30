@@ -2,8 +2,10 @@ package com.yrol.pma.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import com.yrol.pma.dto.ProjectStageCount;
 import com.yrol.pma.entities.Project;
 
 /**
@@ -17,4 +19,7 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 	 * */
 	@Override
 	public List<Project> findAll();
+	
+	@Query(nativeQuery = true, value = "SELECT stage, COUNT(*) as projectStageCount from project GROUP BY stage")
+	public List<ProjectStageCount> projectStageCount();
 }
