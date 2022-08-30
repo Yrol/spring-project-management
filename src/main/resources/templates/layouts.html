@@ -41,20 +41,20 @@
 </nav>
 
 <!-- Employees table component -->
-<table class="table" th:fragment="employees-table-component(employees)">
+<table class="table" th:fragment="employees-table-component(employeesProjectCount)">
 
 	<thead class="table-striped table-dark">
 		<tr>
 			<th scope="col">First name</th>
 			<th scope="col">Last name</th>
-			<th scope="col">Email</th>
+			<th scope="col">Project Count</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="employee : ${employees}">
-			<td th:text="${employee.firstName}" />
-			<td th:text="${employee.lastName}" />
-			<td th:text="${employee.email}" />
+		<tr th:each="empProjCount : ${employeesProjectCount}">
+			<td th:text="${empProjCount.firstName}" />
+			<td th:text="${empProjCount.lastName}" />
+			<td th:text="${empProjCount.projectCount}" />
 		</tr>
 	</tbody>
 </table>
