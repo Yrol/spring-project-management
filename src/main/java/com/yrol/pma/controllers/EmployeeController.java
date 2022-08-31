@@ -2,6 +2,7 @@ package com.yrol.pma.controllers;
 
 import java.util.List;
 
+import com.yrol.pma.dto.EmployeeProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +24,10 @@ public class EmployeeController {
 	public String displayEmployees(Model model) {
 		
 		List<Employee> employees = empRepo.findAll();
+		List<EmployeeProject> employeesProjectCount = empRepo.employeeProjects();
 		
 		//Passing Employees object (fetching all existing)
-		model.addAttribute("employees", employees);
+		model.addAttribute("employeesProjectCount", employeesProjectCount);
 		
 		return "/employees/list-employees";
 
