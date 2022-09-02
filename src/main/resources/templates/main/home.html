@@ -9,73 +9,60 @@
 	<nav th:replace="layouts :: navbar-component"></nav>
 
 	<div class="container">
-		<div class="row">
-			<div class="col-8">
-				<div class="container">
-					<div class="card">
-						<div class="card-body">
-							Current Projects
-						</div>
-					</div>
-					<!--
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Project Name</th>
-                                <th>Project Stage</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="project : ${projects}">
-                                <td th:text="${project.name}" />
-                                <td th:text="${project.stage}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                    -->
-
-					<!-- Method 1: display projects table using a common component -->
-					<table th:replace="layouts :: projects-table-component(${projects})"></table>
-				</div>
-
-				<div class="container">
-					<div class="card">
-						<div class="card-body">
-							Employee Project Count
-						</div>
-					</div>
-					<!-- Method 1: display without using a common component -->
-					<!--
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Employee First name</th>
-                                <th>Employee Last name</th>
-                                <th>Employee Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="employee : ${employees}">
-                                <td th:text="${employee.firstName}" />
-                                <td th:text="${employee.lastName}" />
-                                <td th:text="${employee.email}" />
-                            </tr>
-                        </tbody>
-                    </table>
-                    -->
-
-					<!-- Method 2: display employees table using a common component defined in layouts.html -->
-					<table th:replace="layouts :: employees-table-component(${employeesProjectCount})"></table>
-				</div>
-			</div>
-			<div class="col-4">
-				<canvas id="myPieChart" height="50" width="50">
-
-				</canvas>
-			</div>
+		<div class="card">
+		  <div class="card-body">
+		   Current Projects
+		  </div>
 		</div>
+		<!-- 	
+		<table>
+			<thead>
+				<tr>
+					<th>Project Name</th>
+					<th>Project Stage</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="project : ${projects}">
+					<td th:text="${project.name}" />
+					<td th:text="${project.stage}" />
+				</tr>
+			</tbody>
+		</table> 
+		-->
+
+		<!-- Method 1: display projects table using a common component -->
+		<table th:replace="layouts :: projects-table-component(${projects})"></table>
 	</div>
 
-<script type="text/javascript" th:src="@{js/myChart.js}"></script>
+	<div class="container">
+		<div class="card">
+		  <div class="card-body">
+		   Employee Project Count
+		  </div>
+		</div>
+		<!-- Method 1: display without using a common component -->
+		<!--
+		<table>
+			<thead>
+				<tr>
+					<th>Employee First name</th>
+					<th>Employee Last name</th>
+					<th>Employee Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee : ${employees}">
+					<td th:text="${employee.firstName}" />
+					<td th:text="${employee.lastName}" />
+					<td th:text="${employee.email}" />
+				</tr>
+			</tbody>
+		</table>
+		-->
+
+		<!-- Method 2: display employees table using a common component defined in layouts.html -->
+		<table th:replace="layouts :: employees-table-component(${employeesProjectCount})"></table>
+	</div>
 </body>
 </html>
