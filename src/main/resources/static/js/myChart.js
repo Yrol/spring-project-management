@@ -1,22 +1,40 @@
-//For pie chart
-new Chart(document.getElementById("myPieChart"), {
-    type: 'pie',
-    data: {
-        labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-        ],
-          datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
-            backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(54, 162, 235)',
-              'rgb(255, 205, 86)'
-            ],
-            hoverOffset: 4
-          }]
+var decodedChartData =  decodeHtml(chartData);
+var chartJsonArray = JSON.parse(decodedChartData);
+
+var numericData = new Array();
+var labelData = new Array();
+
+chartJsonArray.forEach(function(item){
+  numericData.push(item.projectStageCount);
+  labelData.push(item.stage);
+});
+
+var config = {
+  type: 'pie',
+  data: {
+    datasets: [{
+      data: numericData,
+      backgroundColor: ['#FF6384', '#36A2EB','#FFCE56']
+    }],
+    labels: labelData
+  },
+  options: {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Project Statuses'
     },
-    options: {}
-})
+    animation: {
+      animateScale: true,
+      animateRotate: true
+    }
+  }
+};
+
+new Chart(document.getElementById('myPieChart'), config);
+
+function decodeHtml(html) {
+    var txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+}

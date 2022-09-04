@@ -49,7 +49,7 @@ public class HomeController {
 		//Adding the projects
 		model.addAttribute("projects", projects);
 		model.addAttribute("employeesProjectCount", employeesProjectCount);
-		model.addAttribute("projectStageCount", projectStageCount);
+		model.addAttribute("projectStageCount", jsonString);
 		
 		return "/main/home";
 	}
