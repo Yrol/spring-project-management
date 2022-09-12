@@ -3,7 +3,7 @@ A simple Project Management app develped using Spring Boot, Thyemleaf and Bootst
 
 MySQL has been used for data management.
 
-### Create Artifacts in IntelliJ and running the project.
+### Create Artifacts in IntelliJ and running the project locally.
 
 + **Step 1** : File &rarr; Project Structure
   <p><img src="https://i.imgur.com/rTo35dE.png"></img></p>
