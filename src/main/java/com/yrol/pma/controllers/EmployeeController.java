@@ -29,7 +29,7 @@ public class EmployeeController {
 		//Passing Employees object (fetching all existing)
 		model.addAttribute("employeesProjectCount", employeesProjectCount);
 		
-		return "/employees/list-employees";
+		return "employees/list-employees";
 
 	}
 	
@@ -41,7 +41,7 @@ public class EmployeeController {
 		//Passing an Employee object to create a new employee
 		model.addAttribute("employee", employee);
 		
-		return "/employees/new-employee";
+		return "employees/new-employee";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)

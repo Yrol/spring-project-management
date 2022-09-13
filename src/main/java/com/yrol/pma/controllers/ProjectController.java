@@ -32,7 +32,7 @@ public class ProjectController {
 
 		model.addAttribute("projects", projects);
 
-		return "/projects/list-projects";
+		return "projects/list-projects";
 	}
 
 	@RequestMapping("/new")
@@ -46,7 +46,7 @@ public class ProjectController {
 		model.addAttribute("project", project);
 		model.addAttribute("allEmployees", employees);
 
-		return "/projects/new-project";
+		return "projects/new-project";
 	}
 
 	/**

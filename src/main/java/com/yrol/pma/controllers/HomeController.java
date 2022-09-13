@@ -51,6 +51,6 @@ public class HomeController {
 		model.addAttribute("employeesProjectCount", employeesProjectCount);
 		model.addAttribute("projectStageCount", jsonString);
 		
-		return "/main/home";
+		return "main/home";
 	}
 }
