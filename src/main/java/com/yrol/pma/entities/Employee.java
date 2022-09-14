@@ -2,15 +2,7 @@ package com.yrol.pma.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 /**
  * Marking the Employee as an Entity. Hence, Sprint Boot will create a table in
@@ -22,11 +14,13 @@ public class Employee {
 	/**
 	 * @GeneratedValue is an annotation available within Spring to map Java objects
 	 *                 automatically to DB tables.
-	 * GenerationType.IDENTITY -  will rely on database for the next available ID
+	 * GenerationType.SEQUENCE -  will rely on database for the next available ID
+	 * @SequenceGenerator - using the sequence generator created in Postgres - employee_seq
 	 * @Id annotation is used for unique ID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
+	@SequenceGenerator(name = "employee_seq", allocationSize = 1)
 	private long employeeId;
 
 	private String firstName;
