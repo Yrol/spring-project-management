@@ -69,12 +69,17 @@
 				</div>
 			</div>
 			<div class="col-4">
-				<canvas id="myPieChart" height="50" width="50">
-					<!-- [[${projectStageCount}]] - is the convention of assigning Java returned variables in JS -->
-					<script type="text/javascript">
-						var chartData = "[[${projectStageCount}]]";
-					</script>
-				</canvas>
+				<div class="container">
+					<canvas id="myPieChart" height="50" width="50">
+						<!-- [[${projectStageCount}]] - is the convention of assigning Java returned variables in JS -->
+						<script type="text/javascript">
+							var chartData = "[[${projectStageCount}]]";
+						</script>
+					</canvas>
+				</div>
+				<div class="container">
+					<p th:text="${appVersion}"></p>
+				</div>
 			</div>
 		</div>
 	</div>

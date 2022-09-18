@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yrol.pma.dto.ProjectStageCount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,9 @@ public class HomeController {
 	
 	@Autowired
 	EmployeeRepository empRepo;
+
+	@Value("${version}")
+	String ver;
 	
 	/**
 	 * @GetMapping is similar to using "RequestMethod.GET" within @RequestMapping. For post use @PostMapping
@@ -50,6 +54,8 @@ public class HomeController {
 		model.addAttribute("projects", projects);
 		model.addAttribute("employeesProjectCount", employeesProjectCount);
 		model.addAttribute("projectStageCount", jsonString);
+
+		model.addAttribute("appVersion", ver);
 		
 		return "main/home";
 	}
