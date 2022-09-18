@@ -1,3 +1,5 @@
+-- Schema that will be used for creating test tables which are up to date with the current table structure for the project.
+
 CREATE SEQUENCE IF NOT EXISTS employee_seq;
 
 CREATE TABLE IF NOT EXISTS employee (
