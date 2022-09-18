@@ -3,7 +3,37 @@ A simple Project Management app develped using Spring Boot, Thyemleaf and Bootst
 
 PostgreSQL has been used for data management.
 
-### Create Artifacts in IntelliJ and run project locally.
+### Running the project locally in IntelliJ CE.
++ **Step 1** : Go to Edit Configurations &rarr; Add New &rarr; Application
+  <p><img src="https://i.imgur.com/WDPIdls.png"></img></p>
+  <p><img src="https://i.imgur.com/0wZl0ON.png"></p>
+  
++ **Step 2** : In the newly opened window, select Modify Options > Add VM Options. This step will allow us to specify a local server with a port.
+  <p><img src="https://i.imgur.com/0KVgpg2.png"></p>
+  
+  Add following details in the configuration window.
+
+  - **Name:** `<project name>`
+
+  - **VM Options:** `-Dserver.port=8080`
+
+  - **Java:** `java 15`
+
+  - **Main class:** `com.yrol.pma.ProjectManagementApplication`
+  
+  <p><img src="https://i.imgur.com/UErxhVN.png"></p>
+
++ **Step 3** : Running the project. We should now see the new run option as below.
+  <p><img src="https://i.imgur.com/aHd60US.png"></p>
+  
+  Click the run button to run the project
+  <p><img src="https://i.imgur.com/e0C2POL.png"></p>
+
+
+---
+
+
+### Create Artifacts / JAR in IntelliJ and run project locally.
 
 + **Step 1** : File &rarr; Project Structure
   <p><img src="https://i.imgur.com/rTo35dE.png"></img></p>
