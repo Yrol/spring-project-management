@@ -1,7 +1,7 @@
 # Spring Project Management
 A simple Project Management app develped using Spring Boot, Thyemleaf and Bootstrap. 
 
-MySQL has been used for data management.
+PostgreSQL has been used for data management.
 
 ### Create Artifacts in IntelliJ and run project locally.
 

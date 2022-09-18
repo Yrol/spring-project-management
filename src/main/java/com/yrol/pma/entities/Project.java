@@ -20,7 +20,7 @@ public class Project {
 	 * @Id annotation is used for unique ID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_seq")
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "project_seq")
 	@SequenceGenerator(name = "project_seq", allocationSize = 1)
 	private long projectId;
 

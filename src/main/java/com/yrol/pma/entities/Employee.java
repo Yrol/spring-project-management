@@ -19,7 +19,7 @@ public class Employee {
 	 * @Id annotation is used for unique ID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "employee_seq")
 	@SequenceGenerator(name = "employee_seq", allocationSize = 1)
 	private long employeeId;
 
