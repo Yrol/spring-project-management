@@ -1,7 +1,7 @@
 # Spring Project Management
 A simple Project Management app develped using Spring Boot, Thyemleaf and Bootstrap. 
 
-PostgreSQL has been used for data management.
+PostgreSQL has been used for data management. Create a DB called `pma-springbootdb` and run the schema define in `src/test/resources/schema.sql` as prerequisite.
 
 ### Running the project locally in IntelliJ CE.
 + **Step 1** : Go to Edit Configurations &rarr; Add New &rarr; Application
