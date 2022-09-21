@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+
+  spring-service:
+    build:
+      context: docker-sources/java
+      dockerfile: Dockerfile
+    container_name: project-management
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    volumes:
+      - ./artifacts:/usr/local/bin

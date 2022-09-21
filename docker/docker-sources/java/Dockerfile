@@ -6,6 +6,6 @@ FROM adoptopenjdk/openjdk15
 
 WORKDIR /usr/local/bin/
 
-ADD artifacts .
+# ADD artifacts .
 
 ENTRYPOINT ["java", "-jar", "project-management.jar"]

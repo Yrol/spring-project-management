@@ -31,24 +31,21 @@ PostgreSQL has been used for data management. Create a DB called `pma-springboot
 
 ---
 ### Building and running the project in Docker
-The docker run files are located in `docker` directory. The artifacts' directory - `docker/artifacts` 
+The docker run files are located in `docker` directory. The artifacts directory - `docker/artifacts` 
 consist of JAR files that get copied over to the `/usr/local/bin/` location of the docker container. Make sure to 
-replace these files whenever it's necessary by regenerating them as explained in [Create Artifacts](#-create-artifacts-/-jar-in-intelliJ-and-run-project-locally) section below.
+replace these files whenever it's needed (to regenerate follow [Creating Artifacts](#create-artifacts--jar-in-intellij-and-run-project-locally) section below).
 
-+ **Step 1:** Building a docker image. Go to `docker` directory in the project and run:
-  ```
-  docker image build -t project-management
-  ```
+To run the project in docker, go to the `docker` directory in the project and run:
 
-+ **Step 2:** Running the docker image in a container by mapping to port `8080`:
-  ```
-  docker run -p 8080:8080 project-management 
-  ```  
+```
+docker-compose build
+docker-compose up -d
+```
 
 ---
 
 
-### Create Artifacts / JAR in IntelliJ and run project locally
+### Creating Artifacts / JAR file in IntelliJ and running project locally
 
 + **Step 1:** File &rarr; Project Structure
   <p><img src="https://i.imgur.com/rTo35dE.png"></img></p>
