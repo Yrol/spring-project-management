@@ -9,6 +9,29 @@ services:
     container_name: project-management
     ports:
       - 8080:8080
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./artifacts:/usr/local/bin
+    depends_on:
+      - db
+
+  db:
+    build:
+      context: docker-sources/postgres
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=pma-springbootdb
+    expose:
+      - 5432
+    ports:
+      - '5432:5432'
+    volumes:
+#      - db:/var/lib/postgresql/data
+      - ./docker-sources/postgres/dbscripts/:/docker-entrypoint-initdb.d/
+volumes:
+  db:
+    driver: local
+

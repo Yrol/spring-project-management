@@ -1,7 +1,10 @@
 # Spring Project Management
 A simple Project Management app developed using Spring Boot, Thymeleaf and Bootstrap. 
 
-PostgreSQL has been used for data management. Create a DB called `pma-springbootdb` and run the schema define in `src/test/resources/schema.sql` as a prerequisite.
+### Prerequisites
++ **PostgreSQL** has been used for data management. Create a DB called `pma-springbootdb` 
+  and run the schema define in `src/test/resources/schema.sql` as a prerequisite 
+  (in [pgAdmin](https://www.pgadmin.org/) tool).
 
 ### Running the project locally in IntelliJ CE
 + **Step 1:** Go to Edit Configurations &rarr; Add New &rarr; Application
@@ -33,7 +36,7 @@ PostgreSQL has been used for data management. Create a DB called `pma-springboot
 ### Building and running the project in Docker
 The docker run files are located in `docker` directory. The artifacts directory - `docker/artifacts` 
 consist of JAR files that get copied over to the `/usr/local/bin/` location of the docker container. Make sure to 
-replace these files whenever it's needed (to regenerate follow [Creating Artifacts](#create-artifacts--jar-in-intellij-and-run-project-locally) section below).
+replace these files whenever it's needed (to regenerate follow [Creating Artifacts](#creating-artifacts--jar-file-in-intellij-and-running-project-locally) section below).
 
 To run the project in docker, go to the `docker` directory in the project and run:
 
