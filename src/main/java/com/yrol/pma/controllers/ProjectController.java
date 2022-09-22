@@ -2,15 +2,14 @@ package com.yrol.pma.controllers;
 
 import java.util.List;
 
+import com.yrol.pma.services.EmployeeService;
+import com.yrol.pma.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.yrol.pma.dao.EmployeeRepository;
-import com.yrol.pma.dao.ProjectRepository;
 import com.yrol.pma.entities.Employee;
 import com.yrol.pma.entities.Project;
 
@@ -20,15 +19,16 @@ public class ProjectController {
 
 	// @Autowired used for handling DI automatically
 	@Autowired
-	ProjectRepository proRepo;
+	ProjectService projService;
+
 
 	@Autowired
-	EmployeeRepository empRepo;
+	EmployeeService empService;
 
 	@RequestMapping("")
 	public String displayProjects(Model model) {
 
-		List<Project> projects = proRepo.findAll();
+		List<Project> projects = projService.getAll();
 
 		model.addAttribute("projects", projects);
 
@@ -41,7 +41,7 @@ public class ProjectController {
 		// creating a project object
 		Project project = new Project();
 
-		List<Employee> employees = empRepo.findAll();
+		List<Employee> employees = empService.getAll();
 
 		model.addAttribute("project", project);
 		model.addAttribute("allEmployees", employees);
@@ -55,7 +55,7 @@ public class ProjectController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String createProject(Project project) {
 		// Saving data using ProjectRepository
-		proRepo.save(project);
+		projService.save(project);
 
 		/**
 		 * The following only need to be used in OneToMany relationship between Projects

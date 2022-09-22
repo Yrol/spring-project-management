@@ -7,16 +7,15 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yrol.pma.dto.ProjectStageCount;
+import com.yrol.pma.services.EmployeeService;
+import com.yrol.pma.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.yrol.pma.dao.EmployeeRepository;
-import com.yrol.pma.dao.ProjectRepository;
 import com.yrol.pma.dto.EmployeeProject;
-import com.yrol.pma.entities.Employee;
 import com.yrol.pma.entities.Project;
 
 @Controller
@@ -24,10 +23,10 @@ public class HomeController {
 	
 	//@Autowired used for handling DI automatically
 	@Autowired
-	ProjectRepository proRepo;
+	ProjectService projService;
 	
 	@Autowired
-	EmployeeRepository empRepo;
+	EmployeeService empService;
 
 	@Value("${version}")
 	String ver;
@@ -40,9 +39,9 @@ public class HomeController {
 
 		Map<String, Object> map = new HashMap<>();
 		
-		List<Project> projects = proRepo.findAll();
-		List<EmployeeProject> employeesProjectCount = empRepo.employeeProjects();
-		List<ProjectStageCount> projectStageCount = proRepo.projectStageCount();
+		List<Project> projects = projService.getAll();
+		List<EmployeeProject> employeesProjectCount = empService.employeeProjects();
+		List<ProjectStageCount> projectStageCount = projService.stageCount();
 
 		//converting the projectStageCount to JSON to be used by the home template
 		ObjectMapper objectMapper = new ObjectMapper();

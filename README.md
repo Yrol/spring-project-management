@@ -36,7 +36,8 @@ A simple Project Management app developed using Spring Boot, Thymeleaf and Boots
 ### Building and running the project in Docker
 The docker run files are located in `docker` directory. The artifacts directory - `docker/artifacts` 
 consist of JAR files that get copied over to the `/usr/local/bin/` location of the docker container. Make sure to 
-replace these files whenever it's needed (to regenerate follow [Creating Artifacts](#creating-artifacts--jar-file-in-intellij-and-running-project-locally) section below).
+replace these files whenever it's needed 
+(to regenerate follow [Creating Artifacts](#creating-artifacts--jar-file-in-intellij-and-running-project-locally) section below).
 
 To run the project in docker, go to the `docker` directory in the project and run:
 
@@ -44,6 +45,8 @@ To run the project in docker, go to the `docker` directory in the project and ru
 docker-compose build
 docker-compose up -d
 ```
+
+The DB schemas are located in `/docker/docker-sources/postgres/dbscripts/` directory which will execute automatically during `docker-compose`
 
 ---
 
