@@ -30,7 +30,6 @@ public class  EmployeeController {
 		model.addAttribute("employeesProjectCount", employeesProjectCount);
 		
 		return "employees/list-employees";
-
 	}
 	
 	@RequestMapping("/new")
