@@ -14,7 +14,7 @@ import com.yrol.pma.entities.Employee;
 
 @Controller
 @RequestMapping("/employees")
-public class EmployeeController {
+public class  EmployeeController {
 	
 	//@Autowired used for handling DI automatically
 	@Autowired

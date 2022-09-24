@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * An intermediary service that'll abstract all the employee actions.
+ * An intermediary service that'll abstract all the project actions.
  * Consumed by the Controllers.
  * */
 

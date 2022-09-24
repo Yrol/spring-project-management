@@ -1,6 +1,7 @@
 package com.yrol.pma.dao;
 
 import com.yrol.pma.entities.Project;
+import com.yrol.pma.services.ProjectService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ProjectRepositoryIntegrationTest {
 
     @Autowired
-    ProjectRepository proRepo;
+    ProjectService projService;
 
     @Test
     public void if_new_project_saved_then_success() {
         Project newProject = new Project("New Test Project", "COMPLETED", "This is a new Test Project");
-        proRepo.save(newProject);
-        assertEquals(4, proRepo.findAll().size());
+        projService.save(newProject);
+        assertEquals(4, projService.getAll().size());
     }
 }
