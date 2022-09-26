@@ -55,7 +55,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain authorizationManager(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/projects/new").hasRole("ADMIN")
+                .antMatchers("/projects/save").hasRole("ADMIN")
                 .antMatchers("/employees/new").hasRole("ADMIN")
+                .antMatchers("/employees/save").hasRole("ADMIN")
+                .antMatchers("/login*").permitAll()
                 .antMatchers("/").authenticated().and().formLogin();
         return http.build();
     }

@@ -17,7 +17,7 @@
 		Binding the fields ex: project.name & etc as defined in Project entity
 		-->
 
-		<form action="/projects/save" th:object=${project} method="POST">
+		<form th:action="@{/projects/save}" th:object=${project} method="POST">
 			<div class="form-group">
 				<label for="inputProjectName">Project name</label> <input
 					type="text" placeholder="Project Name" class="form-control"

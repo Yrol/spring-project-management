@@ -16,7 +16,7 @@
 		"${employee}" is binded in "EmployeeController.java" via addAttribute Model method.
 		Binding the fields ex: employee.name & etc as defined in Employee entity
 		-->
-		<form action="/employees/save" th:object=${employee} method="POST">
+		<form th:action="@{/employees/save}" th:object=${employee} method="POST">
 			<div class="form-group">
 				<label for="inputFirstName">First name</label> <input type="text"
 					class="form-control" id="inputFirstName"
