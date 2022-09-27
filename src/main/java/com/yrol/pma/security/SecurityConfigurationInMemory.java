@@ -2,6 +2,7 @@ package com.yrol.pma.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,11 +12,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Authentication
+ * Authentication using the In-memory as the datasource.
  * */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration {
+@Profile("dev-jdbc")
+public class SecurityConfigurationInMemory {
 
     /**
      * Password encryption using BCrypt
@@ -59,6 +61,7 @@ public class SecurityConfiguration {
                 .antMatchers("/employees/new").hasRole("ADMIN")
                 .antMatchers("/employees/save").hasRole("ADMIN")
                 .antMatchers("/login*").permitAll()
+                .antMatchers("/h2-console*").permitAll()
                 .antMatchers("/").authenticated().and().formLogin();
         return http.build();
     }
