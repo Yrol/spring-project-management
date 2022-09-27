@@ -13,10 +13,9 @@ import com.yrol.pma.dao.EmployeeRepository;
 import com.yrol.pma.dao.ProjectRepository;
 import com.yrol.pma.entities.Employee;
 import com.yrol.pma.entities.Project;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 
-@SpringBootApplication( exclude = {SecurityAutoConfiguration.class} )
+//@SpringBootApplication( exclude = {SecurityAutoConfiguration.class} ) // use this for disabling the Spring security
+@SpringBootApplication
 public class ProjectManagementApplication {
 
 	@Autowired
