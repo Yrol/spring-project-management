@@ -22,3 +22,14 @@ CREATE TABLE IF NOT EXISTS project_employee (
 project_id BIGINT REFERENCES project,
 employee_id BIGINT REFERENCES employee
 );
+
+CREATE SEQUENCE IF NOT EXISTS user_accounts_seq;
+
+CREATE TABLE IF NOT EXISTS user_accounts (
+	user_id BIGINT NOT NULL DEFAULT nextval('user_accounts_seq') PRIMARY KEY,
+	username VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	role VARCHAR(255),
+	enabled boolean NOT NULL
+);

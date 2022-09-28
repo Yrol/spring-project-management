@@ -15,50 +15,45 @@ import org.springframework.security.web.SecurityFilterChain;
 import javax.sql.DataSource;
 
 /**
- * Authentication being used with H2 datasource.
+ * Authentication being used with JDBC.
  * */
 @Configuration
 @EnableWebSecurity
-@Profile("dev-h2")
-public class SecurityConfigurationH2Database {
+@Profile("dev-jdbc")
+public class SecurityConfigurationJDBC {
+
 
     /**
-     * DataSource will point to H2 datasource by default
+     * DataSource will automatically point to whatever is defined in properties - in this case JDBC
      * */
     @Autowired
     DataSource dataSource;
 
     /**
-     * DataSource will automatically point to whatever is defined in properties - in this case H2
+     * Made available / loaded via BCryptPasswordEncoder Bean in WebConfig.java
      * */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    BCryptPasswordEncoder bCryptEncoder;
 
     /**
-     * User Authentication connected with H2 DB (data will be saved to H2 db)
-     * The following will create a schema / tables - USER and AUTHORITIES in h2 db if not exist.
+     * User Authentication connected to the JDBC datasource
+     * The tables "user_accounts" and "user_accounts_seq" must exist prior to running this.
      * Using the encrypted(BCrypt) passwords generated via: https://bcrypt-generator.com/
      */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .jdbcAuthentication()
-                .dataSource(dataSource)
-                .withDefaultSchema()
-                .passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("user1")
-                .password("$2a$12$lyybDchRgwKOVyppgcmeIehlpe0Hgo8.XgNFjLyvFMnSpAjTlDBAi") // pass123
-                .roles("USER")
-                .and()
-                .withUser("admin")
-                .password("$2a$12$6AwjQfZVr9EUfw/4bQE1/eDSXfSkCWrNit6LIWv.xNjLnUm44edxO") // admin1234
-                .roles("ADMIN").and().and().build();
+                .usersByUsernameQuery("select username, password, enabled " +
+                        "from user_accounts where username = ?")
+                .authoritiesByUsernameQuery("select username, role " +
+                        "from user_accounts where username = ?").dataSource(dataSource)
+                .passwordEncoder(bCryptEncoder)
+                .and().build();
     }
 
     /**
-     * User Authorization mapping. Ex: only ADMIN users can create new projects and Employees
+     * User Authorization mapping. Ex: only ADMIN users can create new projects and Employees. Everything else "/", "/**" can be access by normal users.
      * */
     @Bean
     public SecurityFilterChain authorizationManager(HttpSecurity http) throws Exception {
@@ -67,13 +62,8 @@ public class SecurityConfigurationH2Database {
                 .antMatchers("/projects/save").hasRole("ADMIN")
                 .antMatchers("/employees/new").hasRole("ADMIN")
                 .antMatchers("/employees/save").hasRole("ADMIN")
-                .antMatchers("/login*").permitAll()
-                .antMatchers("/h2-console*").permitAll()
-                .antMatchers("/").authenticated().and().formLogin();
-
-        //Should NOT use in production. Only used for enabling the H2 console access in local development
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+                .antMatchers("/", "/**").permitAll()
+                .and().formLogin();
 
         return http.build();
     }
