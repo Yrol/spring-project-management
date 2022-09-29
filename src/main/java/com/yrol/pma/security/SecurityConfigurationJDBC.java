@@ -45,7 +45,7 @@ public class SecurityConfigurationJDBC {
                 .jdbcAuthentication()
                 .usersByUsernameQuery("select username, password, enabled " +
                         "from user_accounts where username = ?")
-                . ("select username, role " +
+                .authoritiesByUsernameQuery("select username, role " +
                         "from user_accounts where username = ?").dataSource(dataSource)
                 .passwordEncoder(bCryptEncoder)
                 .and().build();
@@ -62,7 +62,8 @@ public class SecurityConfigurationJDBC {
                 .antMatchers("/employees/new").hasAuthority("ADMIN")
                 .antMatchers("/employees/save").hasAuthority("ADMIN")
                 .antMatchers("/", "/**").permitAll()
-                .and().formLogin();
+                .and().formLogin()
+                .and().logout().logoutSuccessUrl("/");
 
         return http.build();
     }
