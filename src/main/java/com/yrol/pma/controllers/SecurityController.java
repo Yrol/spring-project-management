@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -27,12 +29,18 @@ public class SecurityController {
         return "security/register";
     }
 
-    @PostMapping("/register/save")
-    public String register(Model model, UserAccount user, RedirectAttributes redirectAttributes) {
+    @PostMapping("/register")
+    public String register(Model model, @Valid UserAccount user, BindingResult result) {
 
-        //Temporary fix for prevent saving duplicate accounts (should to introduce proper validation).
+        //Temporary fix for prevent saving duplicate accounts (should to introduce custom validator).
         if(securityService.getUsersByEmailOrUsername(user).size() > 0) {
-            return "redirect:/register";
+            model.addAttribute("userAccount", user);
+            return "security/register";
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute("userAccount", user);
+            return "security/register";
         }
 
         //encrypting the password

@@ -1,6 +1,9 @@
 package com.yrol.pma.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user_accounts")
@@ -11,11 +14,19 @@ public class UserAccount {
     @Column(name = "user_id")
     private long userId;
 
+    //Size.UserAccount.userName is defined in ValidationMessages.properties
+    @NotEmpty
+    @Size(min = 5, message = "{Size.UserAccount.userName}")
     @Column(name = "username")
     private String userName;
 
+    @NotEmpty
+    @Email
     private String email;
 
+    //Size.UserAccount.password is defined in ValidationMessages.properties
+    @NotEmpty
+    @Size(min = 5, message = "{Size.UserAccount.password}")
     private String password;
 
     private boolean enabled = true;
