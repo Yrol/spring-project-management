@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 public class SecurityController {
@@ -26,7 +28,12 @@ public class SecurityController {
     }
 
     @PostMapping("/register/save")
-    public String register(Model model,  UserAccount user) {
+    public String register(Model model, UserAccount user, RedirectAttributes redirectAttributes) {
+
+        //Temporary fix for prevent saving duplicate accounts (should to introduce proper validation).
+        if(securityService.getUsersByEmailOrUsername(user).size() > 0) {
+            return "redirect:/register";
+        }
 
         //encrypting the password
         user.setPassword(bCryptEncoder.encode(user.getPassword()));
