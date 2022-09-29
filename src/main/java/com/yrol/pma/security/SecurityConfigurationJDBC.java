@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
@@ -46,7 +45,7 @@ public class SecurityConfigurationJDBC {
                 .jdbcAuthentication()
                 .usersByUsernameQuery("select username, password, enabled " +
                         "from user_accounts where username = ?")
-                .authoritiesByUsernameQuery("select username, role " +
+                . ("select username, role " +
                         "from user_accounts where username = ?").dataSource(dataSource)
                 .passwordEncoder(bCryptEncoder)
                 .and().build();
@@ -58,10 +57,10 @@ public class SecurityConfigurationJDBC {
     @Bean
     public SecurityFilterChain authorizationManager(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/projects/new").hasRole("ADMIN")
-                .antMatchers("/projects/save").hasRole("ADMIN")
-                .antMatchers("/employees/new").hasRole("ADMIN")
-                .antMatchers("/employees/save").hasRole("ADMIN")
+                .antMatchers("/projects/new").hasAuthority("ADMIN")
+                .antMatchers("/projects/save").hasAuthority("ADMIN")
+                .antMatchers("/employees/new").hasAuthority("ADMIN")
+                .antMatchers("/employees/save").hasAuthority("ADMIN")
                 .antMatchers("/", "/**").permitAll()
                 .and().formLogin();
 

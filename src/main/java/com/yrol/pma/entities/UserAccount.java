@@ -22,6 +22,14 @@ public class UserAccount {
 
     public UserAccount() {}
 
+    public UserAccount(String userName, String email, String password, boolean enabled) {
+        super();
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+    }
+
     public long getUserId() {
         return userId;
     }

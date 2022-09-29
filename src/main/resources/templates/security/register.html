@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<!-- Loading the head using thymeleaf component defined inside "layout.html" -->
+<head th:replace="layouts :: head-component(page_name='Register')"></head>
+<body>
+
+  <!-- Loading the navbar using thymeleaf component added inside "layout.html" -->
+  <nav th:replace="layouts :: navbar-component"></nav>
+
+  <div class="container mt-2">
+
+    <h3>Register</h3>
+
+    <form th:action="@{/register/save}" th:object=${userAccount} method="POST">
+      <div class="form-group">
+        <label for="inputEmail">Email address</label> <input type="email"
+                                                             class="form-control" id="inputEmail" aria-describedby="emailHelp"
+                                                             placeholder="Enter email" th:field="${userAccount.email}" required> <small
+              id="emailHelp" class="form-text text-muted">We'll never
+        share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="inputUsername">Username</label> <input type="text"
+                                                              class="form-control" id="inputUsername"
+                                                              placeholder="Enter first name" th:field="${userAccount.userName}" required>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Password</label> <input type="password"
+                                                            class="form-control" id="inputPassword" placeholder="Enter password"
+                                                            th:field="${userAccount.password}" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </div>
+
+</body>
