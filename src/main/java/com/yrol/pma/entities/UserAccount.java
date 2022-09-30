@@ -1,5 +1,8 @@
 package com.yrol.pma.entities;
 
+import com.yrol.pma.validation.UniqueEmail;
+import com.yrol.pma.validation.UniqueUsername;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -17,11 +20,14 @@ public class UserAccount {
     //Size.UserAccount.userName is defined in ValidationMessages.properties
     @NotEmpty
     @Size(min = 5, message = "{Size.UserAccount.userName}")
-    @Column(name = "username")
+    @UniqueUsername
+    @Column(name = "username", unique = true)
     private String userName;
 
     @NotEmpty
     @Email
+    @UniqueEmail
+    @Column(unique = true)
     private String email;
 
     //Size.UserAccount.password is defined in ValidationMessages.properties

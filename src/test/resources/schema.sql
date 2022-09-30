@@ -31,5 +31,6 @@ CREATE TABLE IF NOT EXISTS user_accounts (
 	email VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
 	role VARCHAR(255),
-	enabled boolean NOT NULL
+	enabled boolean NOT NULL,
+	CONSTRAINT user_account_unique UNIQUE (username, email)
 );

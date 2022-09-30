@@ -32,12 +32,6 @@ public class SecurityController {
     @PostMapping("/register")
     public String register(Model model, @Valid UserAccount user, BindingResult result) {
 
-        //Temporary fix for prevent saving duplicate accounts (should to introduce custom validator).
-        if(securityService.getUsersByEmailOrUsername(user).size() > 0) {
-            model.addAttribute("userAccount", user);
-            return "security/register";
-        }
-
         if (result.hasErrors()) {
             model.addAttribute("userAccount", user);
             return "security/register";
