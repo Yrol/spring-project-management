@@ -1,4 +1,4 @@
-package com.yrol.pma.validation;
+package com.yrol.pma.validation.useraccount;
 
 import java.lang.annotation.RetentionPolicy;
 import javax.validation.Constraint;
@@ -7,11 +7,15 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = UniqueUsernameValidator.class)
+/**
+ * creating a custom annotation UniqueEmail for validating the email
+ * */
+
+@Constraint(validatedBy = UniqueEmailValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueUsername {
-    String message() default "Username is already taken.";
+public @interface UniqueEmail {
+    String message() default "Email address is already registered";
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default { };
 }

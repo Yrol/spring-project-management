@@ -1,18 +1,19 @@
-package com.yrol.pma.validation;
+package com.yrol.pma.validation.employees;
 
-import com.yrol.pma.dao.SecurityRepository;
+import com.yrol.pma.dao.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
+public class UniqueEmployeeValidator implements ConstraintValidator<UniqueEmployee, String> {
 
     @Autowired
-    SecurityRepository securityRepository;
+    EmployeeRepository empRepo;
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return securityRepository.getUserByEmail(email).size() == 0;
+        return empRepo.findByEmail(email).size() == 0;
     }
+
 }

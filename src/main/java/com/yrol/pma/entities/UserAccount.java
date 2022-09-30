@@ -1,7 +1,7 @@
 package com.yrol.pma.entities;
 
-import com.yrol.pma.validation.UniqueEmail;
-import com.yrol.pma.validation.UniqueUsername;
+import com.yrol.pma.validation.useraccount.UniqueEmail;
+import com.yrol.pma.validation.useraccount.UniqueUsername;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

@@ -13,19 +13,21 @@
 			<div class="card-body">Create Employee</div>
 		</div>
 		<!-- 
-		"${employee}" is binded in "EmployeeController.java" via addAttribute Model method.
+		"${employee}" is bound in "EmployeeController.java" via addAttribute Model method.
 		Binding the fields ex: employee.name & etc as defined in Employee entity
 		-->
-		<form th:action="@{/employees/save}" th:object=${employee} method="POST">
+		<form th:action="@{/employees/new}" th:object=${employee} method="POST">
 			<div class="form-group">
 				<label for="inputFirstName">First name</label> <input type="text"
 					class="form-control" id="inputFirstName"
 					placeholder="Enter first name" th:field="${employee.firstName}">
+				<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="${employee.firstName}"></div>
 			</div>
 			<div class="form-group">
 				<label for="inputLastName">Last name</label> <input type="text"
 					class="form-control" id="inputLastName" placeholder="Enter last name"
 					th:field="${employee.lastName}">
+				<div class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="${employee.lastName}"></div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail">Email address</label> <input type="email"
@@ -33,6 +35,7 @@
 					placeholder="Enter email" th:field="${employee.email}"> <small
 					id="emailHelp" class="form-text text-muted">We'll never
 					share your email with anyone else.</small>
+				<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="${employee.email}"></div>
 			</div>
 			<button type="submit" class="btn btn-primary">Create
 				Employee</button>

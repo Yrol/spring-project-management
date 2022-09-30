@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.yrol.pma.dto.EmployeeProject;
 import com.yrol.pma.entities.Employee;
+import org.springframework.data.repository.query.Param;
 
 
 /**
@@ -20,6 +21,9 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	 * */
 	@Override
 	public List<Employee> findAll();
+
+	@Query(nativeQuery = true, value = "SELECT * FROM employee WHERE email = :email")
+	public List<Employee> findByEmail(@Param("email") String email);
 	
 	@Query(nativeQuery = true, value = "SELECT e.first_name as firstName, e.last_name as lastName, COUNT(pe.employee_id) as projectCount"
 			+ " FROM employee e LEFT JOIN project_employee pe ON pe.employee_id = e.employee_id"

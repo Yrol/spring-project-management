@@ -7,10 +7,13 @@ import com.yrol.pma.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yrol.pma.entities.Employee;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/employees")
@@ -43,8 +46,13 @@ public class  EmployeeController {
 		return "employees/new-employee";
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String createEmployee(Employee employee) {
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public String createEmployee(Model model, @Valid Employee employee, BindingResult result) {
+
+		if(result.hasErrors()) {
+			model.addAttribute("employee", employee);
+			return "employees/new-employee";
+		}
 	
 		// Saving data using EmployeeRepository
 		empService.save(employee);

@@ -1,4 +1,6 @@
-package com.yrol.pma.validation;
+package com.yrol.pma.validation.employees;
+
+import com.yrol.pma.validation.useraccount.UniqueEmailValidator;
 
 import java.lang.annotation.RetentionPolicy;
 import javax.validation.Constraint;
@@ -7,15 +9,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-/**
- * creating a custom annotation UniqueEmail for validating the email
- * */
 
-@Constraint(validatedBy = UniqueEmailValidator.class)
+@Constraint(validatedBy = UniqueEmployeeValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueEmail {
-    String message() default "Email address is already registered";
+public @interface UniqueEmployee {
+    String message() default "Employee with the same email already exists.";
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default { };
 }

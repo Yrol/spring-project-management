@@ -1,8 +1,13 @@
 package com.yrol.pma.entities;
 
+import com.yrol.pma.validation.employees.UniqueEmployee;
+
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /**
  * Marking the Employee as an Entity. Hence, Sprint Boot will create a table in
@@ -23,8 +28,18 @@ public class Employee {
 	@SequenceGenerator(name = "employee_seq", allocationSize = 1)
 	private long employeeId;
 
+	@NotEmpty
+	@Size(min = 2, message = "{Size.Employee.firstName}")
 	private String firstName;
+
+	@NotEmpty
+	@Size(min = 2, message = "{Size.Employee.lastName}")
 	private String lastName;
+
+	@NotEmpty
+	@Email
+	@UniqueEmployee
+	@Column(unique = true)
 	private String email;
 	
 	/**
