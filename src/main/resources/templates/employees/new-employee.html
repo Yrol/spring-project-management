@@ -37,6 +37,7 @@
 					share your email with anyone else.</small>
 				<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="${employee.email}"></div>
 			</div>
+			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 			<button type="submit" class="btn btn-primary">Create
 				Employee</button>
 		</form>
