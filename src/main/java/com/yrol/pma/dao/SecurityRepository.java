@@ -9,6 +9,12 @@ import java.util.List;
 
 public interface SecurityRepository extends CrudRepository<UserAccount, Long> {
 
+    /**
+     * Overriding the "findAll()" of CrudRepository to return a List instead of type Iterable
+     * */
+    @Override
+    public List<UserAccount> findAll();
+
     @Query(nativeQuery = true, value = "SELECT * FROM user_accounts WHERE username = :username")
     public List<UserAccount> getUsersByUsername(@Param("username") String username);
 

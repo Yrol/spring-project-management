@@ -1,5 +1,6 @@
 package com.yrol.pma.entities;
 
+import com.yrol.pma.enums.useraccount.Roles;
 import com.yrol.pma.validation.useraccount.UniqueEmail;
 import com.yrol.pma.validation.useraccount.UniqueUsername;
 
@@ -36,6 +37,9 @@ public class UserAccount {
     private String password;
 
     private boolean enabled = true;
+
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
     public UserAccount() {}
 
@@ -85,5 +89,13 @@ public class UserAccount {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
     }
 }

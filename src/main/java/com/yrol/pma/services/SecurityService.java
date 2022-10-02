@@ -10,8 +10,11 @@ public class SecurityService {
 
     @Autowired
     SecurityRepository securityRepository;
-
     public UserAccount save(UserAccount user) {
         return securityRepository.save(user);
+    }
+
+    public int userCount() {
+        return securityRepository.findAll().size();
     }
 }

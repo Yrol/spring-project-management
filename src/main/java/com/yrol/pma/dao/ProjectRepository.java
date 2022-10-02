@@ -16,7 +16,7 @@ import org.springframework.data.repository.query.Param;
 public interface ProjectRepository extends CrudRepository<Project, Long> {
 	
 	/**
-	 * Overriding the "findAll()" of CrudRepository to return a List instead of Iterable
+	 * Overriding the "findAll()" of CrudRepository to return a List instead of type Iterable
 	 * */
 	@Override
 	public List<Project> findAll();
