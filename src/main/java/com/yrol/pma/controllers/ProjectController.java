@@ -7,11 +7,14 @@ import com.yrol.pma.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yrol.pma.entities.Employee;
 import com.yrol.pma.entities.Project;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/projects")
@@ -52,8 +55,14 @@ public class ProjectController {
 	/**
 	 * @RequestParam employees are coming from the request payload
 	 */
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String createProject(Project project) {
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public String createProject(Model model, @Valid Project project, BindingResult result) {
+
+		if(result.hasErrors()) {
+			model.addAttribute("project", project);
+			return "projects/new-project";
+		}
+
 		// Saving data using ProjectRepository
 		projService.save(project);
 

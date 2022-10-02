@@ -15,5 +15,4 @@ public class UniqueEmployeeValidator implements ConstraintValidator<UniqueEmploy
     public boolean isValid(String email, ConstraintValidatorContext context) {
         return empRepo.findByEmail(email).size() == 0;
     }
-
 }

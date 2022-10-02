@@ -1,9 +1,13 @@
 package com.yrol.pma.entities;
 
+import com.yrol.pma.validation.projects.UniqueProject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /**
  * Marking the Project as an Entity. Hence, Sprint Boot will create a table in
@@ -24,6 +28,10 @@ public class Project {
 	@SequenceGenerator(name = "project_seq", allocationSize = 1)
 	private long projectId;
 
+	@NotEmpty
+	@Column(unique = true)
+	@Size(min = 2, message = "{Size.Project.name}")
+	@UniqueProject
 	private String name;
 	
 	private String stage;
