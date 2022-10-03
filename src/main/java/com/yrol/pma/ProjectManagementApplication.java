@@ -28,6 +28,10 @@ public class ProjectManagementApplication {
 		SpringApplication.run(ProjectManagementApplication.class, args);
 	}
 
+
+	/**
+	 * Using the CommandLineRunner to seed data instead of using helper files - import.sql / data.sql
+	 * */
 //	@Bean
 //	CommandLineRunner runner() {
 //		return args -> {

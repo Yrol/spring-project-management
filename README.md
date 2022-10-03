@@ -4,14 +4,14 @@ A simple Project Management app developed using Spring Boot, Thymeleaf and Boots
 ### Prerequisites
 + **PostgreSQL** has been used for data management. Create a DB called `pma-springbootdb` 
   and run the schema define in `src/test/resources/schema.sql` as a prerequisite 
-  (in [pgAdmin](https://www.pgadmin.org/) tool).
+  (ex: using [pgAdmin](https://www.pgadmin.org/) tool or any other).
 
 ### Running the project locally in IntelliJ CE
 + **Step 1:** Go to Edit Configurations &rarr; Add New &rarr; Application
   <p><img src="https://i.imgur.com/WDPIdls.png"></img></p>
   <p><img src="https://i.imgur.com/0wZl0ON.png"></p>
   
-+ **Step 2:** In the newly opened window, select Modify Options > Add VM Options. This step will allow us to specify a local server with a port.
++ **Step 2:** In the newly opened window, select Modify Options &rarr; Add VM Options. This step will allow us to specify a local server with a port.
   <p><img src="https://i.imgur.com/0KVgpg2.png"></p>
   
   Add following details in the configuration window.
@@ -46,7 +46,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-The DB schemas are located in `/docker/docker-sources/postgres/dbscripts/` directory which will execute automatically during `docker-compose`
+The DB schemas are located in `/docker/docker-sources/postgres/dbscripts/` directory which will execute automatically during `docker-compose`. Make sure to update it when new schema changed are introduced.
 
 ---
 
