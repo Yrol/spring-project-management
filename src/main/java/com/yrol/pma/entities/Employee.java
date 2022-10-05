@@ -1,5 +1,6 @@
 package com.yrol.pma.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yrol.pma.validation.employees.UniqueEmployee;
 
 import java.util.List;
@@ -60,11 +61,15 @@ public class Employee {
 	/**
 	 * Correlates to Method 3 in Project.java 
 	 * @ManyToMany relationship where many Employees can be assigned with many projects
+	 * @JoinTable Will create an intermediate join table called "project_employee"
+	 * joinColumns will be used for defining relationship columns of both Project and Employee tables.
 	 * Using Cascading rules
+	 * @JsonIgnore - JSON API related prevent returning the Many-to-Many relationship data since running into an infinite loop
 	 * */
 	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
 	fetch = FetchType.LAZY)
 	@JoinTable(name="project_employee", joinColumns=@JoinColumn(name="employee_id"), inverseJoinColumns = @JoinColumn(name="project_id"))
+	@JsonIgnore
 	public List<Project> theProjects;
 	
 	public List<Project> getTheProjects() {

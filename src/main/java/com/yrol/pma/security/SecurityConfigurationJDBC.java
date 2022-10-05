@@ -65,6 +65,7 @@ public class SecurityConfigurationJDBC {
                 .and().formLogin()
                 .and().logout().logoutSuccessUrl("/");
 
+        http.csrf().disable();
         return http.build();
     }
 }

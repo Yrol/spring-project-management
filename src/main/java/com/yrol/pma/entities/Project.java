@@ -1,5 +1,6 @@
 package com.yrol.pma.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yrol.pma.validation.projects.UniqueProject;
 
 import java.util.ArrayList;
@@ -57,14 +58,16 @@ public class Project {
 	
 	/**
 	 *  @ManyToMany relationship where project can be assigned to many employees and vice versa
-	 *  @JoinTable Will create an intermediately join table called "project_employee"
+	 *  @JoinTable Will create an intermediate join table called "project_employee"
 	 *  joinColumns will be used for defining relationship columns of both Project and Employee tables.
+	 *	@JsonIgnore - JSON API related prevent returning the Many-to-Many relationship data since running into an infinite loop
 	 *  Using CascadeTypes to make sure. 
 	 *  Using FetchType LAZY instead of EAGER loading.
 	 *  Method 3
 	 * */
 	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
 	@JoinTable(name="project_employee", joinColumns =@JoinColumn(name="project_id"), inverseJoinColumns = @JoinColumn(name="employee_id"))
+	@JsonIgnore
 	private List<Employee> employees;
 	
 
