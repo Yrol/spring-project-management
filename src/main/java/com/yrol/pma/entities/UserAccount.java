@@ -20,7 +20,7 @@ public class UserAccount {
 
     //Size.UserAccount.userName is defined in ValidationMessages.properties
     @NotEmpty
-    @Size(min = 5, message = "{Size.UserAccount.userName}")
+    @Size(min = 5, max = 50, message = "{Size.UserAccount.userName}")
     @UniqueUsername
     @Column(name = "username", unique = true)
     private String userName;
@@ -33,7 +33,7 @@ public class UserAccount {
 
     //Size.UserAccount.password is defined in ValidationMessages.properties
     @NotEmpty
-    @Size(min = 5, message = "{Size.UserAccount.password}")
+    @Size(min = 5, max = 50, message = "{Size.UserAccount.password}")
     private String password;
 
     private boolean enabled = true;

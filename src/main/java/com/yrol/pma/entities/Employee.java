@@ -30,11 +30,11 @@ public class Employee {
 	private long employeeId;
 
 	@NotEmpty
-	@Size(min = 2, message = "{Size.Employee.firstName}")
+	@Size(min = 2, max = 50, message = "{Size.Employee.firstName}")
 	private String firstName;
 
 	@NotEmpty
-	@Size(min = 2, message = "{Size.Employee.lastName}")
+	@Size(min = 2, max = 50, message = "{Size.Employee.lastName}")
 	private String lastName;
 
 	@NotEmpty

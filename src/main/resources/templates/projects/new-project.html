@@ -38,6 +38,7 @@
 				<label for="projectDescription">Project description</label>
 				<textarea class="form-control" id="projectDescription" rows="3"
 					th:field="${project.description}"></textarea>
+				<div class="alert alert-danger" th:if="${#fields.hasErrors('description')}" th:errors="${project.description}"></div>
 			</div>
 			
 			<!--
@@ -53,7 +54,7 @@
 				</option>
 			</select>
 			</div>
-			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+<!--			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />-->
 			<button type="submit" class="btn btn-primary">Create Project</button>
 		</form>
 	</div>
