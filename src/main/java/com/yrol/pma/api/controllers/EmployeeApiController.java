@@ -2,13 +2,14 @@ package com.yrol.pma.api.controllers;
 
 import com.yrol.pma.dao.EmployeeRepository;
 import com.yrol.pma.entities.Employee;
+import com.yrol.pma.exceptions.generic.InvalidEmailException;
+import com.yrol.pma.exceptions.generic.NoRecordFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,9 +52,9 @@ public class EmployeeApiController {
     public ResponseEntity<Employee> partialUpdate(@PathVariable("id") long id, @RequestBody Employee patchEmployee) {
         Optional<Employee> currentEmployeeInit = empRepo.findById(id);
 
-//        if (currentEmployeeInit.isEmpty()) {
-//            throw new ResourceNotFoundException("invalid employee");
-//        }
+        if (!currentEmployeeInit.isPresent()) {
+            throw new NoRecordFoundException();
+        }
 
         Employee currentEmployee = currentEmployeeInit.get();
 
@@ -62,7 +63,7 @@ public class EmployeeApiController {
 
         // When the current email has changed and making sure its unique
         if (!patchEmail.equals(currentEmail) && empRepo.findByEmail(patchEmail).size() > 0) {
-            return new ResponseEntity<>(currentEmployee, HttpStatus.OK);
+            throw new InvalidEmailException();
         }
 
         currentEmployee.setFirstName(patchEmployee.getFirstName());
