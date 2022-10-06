@@ -13,6 +13,6 @@ public class UniqueProjectValidator implements ConstraintValidator<UniqueProject
 
     @Override
     public boolean isValid(String name, ConstraintValidatorContext context) {
-        return projectRepo.projectByName(name).size() == 0;
+        return projectRepo.findByName(name).size() == 0;
     }
 }

@@ -24,6 +24,15 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 	@Query(nativeQuery = true, value = "SELECT stage, COUNT(*) as projectStageCount from project GROUP BY stage")
 	public List<ProjectStageCount> projectStageCount();
 
-	@Query(nativeQuery = true, value = "SELECT * FROM project WHERE name = :projectName")
-	public List<Project> projectByName(@Param("projectName") String projectName);
+	/**
+	 * Method 1: using queries manually.
+	 * */
+//	@Query(nativeQuery = true, value = "SELECT * FROM project WHERE name = :projectName")
+//	public List<Project> projectByName(@Param("projectName") String projectName);
+
+	/**
+	 * Method 2: automatic queries using exact attribute name along with "findBy" - findBy<Attribute>
+	 * */
+	public List<Project> findByName(String projectName);
+
 }

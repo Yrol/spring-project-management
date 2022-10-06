@@ -26,6 +26,6 @@ public class AppErrorController implements ErrorController {
                 return "errorpages/error-500";
             }
         }
-        return "error/error";
+        return "errorpages/error";
     }
 }

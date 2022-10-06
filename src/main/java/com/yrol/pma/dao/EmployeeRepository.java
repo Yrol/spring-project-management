@@ -22,8 +22,16 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	@Override
 	public List<Employee> findAll();
 
-	@Query(nativeQuery = true, value = "SELECT * FROM employee WHERE email = :email")
-	public List<Employee> findByEmail(@Param("email") String email);
+	/**
+	 * Method 1: using queries manually.
+	 * */
+//	@Query(nativeQuery = true, value = "SELECT * FROM employee WHERE email = :email")
+//	public List<Employee> findByEmail(@Param("email") String email);
+
+	/**
+	 * Method 2: automatic queries using exact attribute name along with "findBy" - findBy<Attribute>
+	 * */
+	public List<Employee> findByEmail(String email);
 	
 	@Query(nativeQuery = true, value = "SELECT e.first_name as firstName, e.last_name as lastName, COUNT(pe.employee_id) as projectCount"
 			+ " FROM employee e LEFT JOIN project_employee pe ON pe.employee_id = e.employee_id"
