@@ -29,5 +29,14 @@ public class GlobalExceptionHandler {
         return errorResponse;
     }
 
+    @ExceptionHandler(InvalidProjectNameException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ResponseBody
+    public ErrorResponse handleInvalidProjectNameException(InvalidProjectNameException ex) {
+
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("Invalid Project name. Project name must be unique.");
+        return errorResponse;
+    }
 
 }

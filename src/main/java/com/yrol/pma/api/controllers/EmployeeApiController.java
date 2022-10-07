@@ -42,6 +42,11 @@ public class EmployeeApiController {
      * */
     @PostMapping(consumes = "application/json")
     public ResponseEntity<Employee> create(@RequestBody Employee employee) {
+
+        if (empRepo.findByEmail(employee.getEmail()).size() > 0) {
+            throw new InvalidEmailException();
+        }
+
         return new ResponseEntity<>(empRepo.save(employee), HttpStatus.CREATED);
     }
 

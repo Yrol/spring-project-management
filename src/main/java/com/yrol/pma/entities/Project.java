@@ -34,7 +34,8 @@ public class Project {
 	@Size(min = 2, max = 50, message = "{Size.Project.name}")
 	@UniqueProject
 	private String name;
-	
+
+	@NotEmpty
 	private String stage;
 
 	@Size(max = 200, message = "{Size.Project.description}")
