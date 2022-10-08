@@ -1,6 +1,7 @@
 package com.yrol.pma.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yrol.pma.enums.projects.Stages;
 import com.yrol.pma.validation.projects.UniqueProject;
 
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class Project {
 	private String name;
 
 	@NotEmpty
-	private String stage;
+	@Enumerated(EnumType.STRING)
+	private Stages stage;
 
 	@Size(max = 200, message = "{Size.Project.description}")
 	private String description;
@@ -85,7 +87,7 @@ public class Project {
 
 	} 
 
-	public Project(String name, String stage, String description) {
+	public Project(String name, Stages stage, String description) {
 		super();
 		this.name = name;
 		this.stage = stage;
@@ -108,11 +110,11 @@ public class Project {
 		this.name = name;
 	}
 
-	public String getStage() {
+	public Stages getStage() {
 		return stage;
 	}
 
-	public void setStage(String stage) {
+	public void setStage(Stages stage) {
 		this.stage = stage;
 	}
 

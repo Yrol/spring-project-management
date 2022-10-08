@@ -2,6 +2,7 @@ package com.yrol.pma.api.controllers;
 
 import com.yrol.pma.dao.ProjectRepository;
 import com.yrol.pma.entities.Project;
+import com.yrol.pma.enums.projects.Stages;
 import com.yrol.pma.exceptions.generic.InvalidProjectNameException;
 import com.yrol.pma.exceptions.generic.NoRecordFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,7 @@ public class ProjectApiController {
         String patchProjName = patchProject.getName();
         String currentProjName = currentProject.getName();
 
-        String patchProjectStage = patchProject.getStage();
-        String currentProjStage = currentProject.getStage();
+        String patchProjectStage = patchProject.getStage().toString();
 
         //Validate unique project name
         if (!currentProjName.equals(patchProjName) && projRepo.findByName(patchProjName).size() > 0) {
@@ -66,8 +66,13 @@ public class ProjectApiController {
         }
 
         currentProject.setName(patchProjName);
-        currentProject.setStage(patchProjName);
-        currentProject.setStage(patchProjectStage.isEmpty() ? currentProjStage : patchProjectStage);
+
+        try {
+            currentProject.setStage(Stages.valueOf(patchProjectStage));
+        } catch(IllegalArgumentException e) {
+            //add to logs
+        }
+
         currentProject.setDescription(patchProject.getDescription());
 
         return new ResponseEntity<>(projRepo.save(currentProject), HttpStatus.OK);
