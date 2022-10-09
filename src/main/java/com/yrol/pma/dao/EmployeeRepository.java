@@ -9,14 +9,17 @@ import com.yrol.pma.dto.EmployeeProject;
 import com.yrol.pma.entities.Employee;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
 /**
  * EmployeeRepository Interface which allows to perform CRUD operations for Employee entity using CrudRepository (without pagination)
  * CrudRepository accepts the entity and the unique ID's type which is Long (employeeId)
  * PagingAndSortingRepository an extension of CrudRepository which allows pagination.
+ * @RepositoryRestResource - using "spring-boot-starter-data-rest" out of the box REST API's: Ex of feting all employees: http://localhost:8080/apiemployees
  * */
 //public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+@RepositoryRestResource(collectionResourceRel = "apiemployees", path = "apiemployees")
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
 
 	/**
