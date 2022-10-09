@@ -38,7 +38,14 @@ public class ProjectApiController {
      * */
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(projRepo.findById(id).get(), HttpStatus.OK);
+
+        Optional<Project> projects = projRepo.findById(id);
+
+        if (!projects.isPresent()) {
+            throw new NoRecordFoundException();
+        }
+
+        return new ResponseEntity<>(projects.get(), HttpStatus.OK);
     }
 
     @PostMapping(consumes = "application/json")

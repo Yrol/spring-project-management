@@ -36,7 +36,14 @@ public class EmployeeApiController {
      * */
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(empRepo.findById(id).get(), HttpStatus.OK);
+
+        Optional<Employee> employees = empRepo.findById(id);
+
+        if (!employees.isPresent()) {
+            throw new NoRecordFoundException();
+        }
+
+        return new ResponseEntity<>(employees.get(), HttpStatus.OK);
     }
 
     /**
