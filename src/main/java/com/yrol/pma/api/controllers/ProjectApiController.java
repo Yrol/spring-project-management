@@ -1,12 +1,15 @@
 package com.yrol.pma.api.controllers;
 
 import com.yrol.pma.dao.ProjectRepository;
+import com.yrol.pma.entities.Employee;
 import com.yrol.pma.entities.Project;
 import com.yrol.pma.enums.projects.Stages;
 import com.yrol.pma.exceptions.generic.InvalidProjectNameException;
 import com.yrol.pma.exceptions.generic.NoRecordFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -85,5 +88,16 @@ public class ProjectApiController {
         } catch(EmptyResultDataAccessException e) {
             // can be written to the app log
         }
+    }
+
+    /**
+     * Endpoint for paginated results
+     * ex: localhost:8080/app-api/projects?page=0&size=10
+     * */
+    @GetMapping(params = {"page", "size"})
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<Project> findPaginatedProjects(@RequestParam("page") int page, @RequestParam("size") int size) {
+        Pageable pageAndSize = PageRequest.of(page, size);
+        return projRepo.findAll(pageAndSize);
     }
 }

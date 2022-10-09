@@ -3,11 +3,13 @@ package com.yrol.pma.dao;
 import com.yrol.pma.entities.UserAccount;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface SecurityRepository extends CrudRepository<UserAccount, Long> {
+//public interface SecurityRepository extends CrudRepository<UserAccount, Long> {
+public interface SecurityRepository extends PagingAndSortingRepository<UserAccount, Long> {
 
     /**
      * Overriding the "findAll()" of CrudRepository to return a List instead of type Iterable

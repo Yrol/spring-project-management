@@ -7,14 +7,17 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.yrol.pma.dto.EmployeeProject;
 import com.yrol.pma.entities.Employee;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 
 /**
- * EmployeeRepository Interface which allows to perform CRUP operations for Employee entity using CrudRepository
+ * EmployeeRepository Interface which allows to perform CRUD operations for Employee entity using CrudRepository (without pagination)
  * CrudRepository accepts the entity and the unique ID's type which is Long (employeeId)
+ * PagingAndSortingRepository an extension of CrudRepository which allows pagination.
  * */
-public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+//public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
 
 	/**
 	 * Overriding the "findAll()" of CrudRepository to return a List instead of Iterable
