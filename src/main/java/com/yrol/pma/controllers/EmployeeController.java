@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.yrol.pma.entities.Employee;
 
@@ -27,10 +26,11 @@ public class  EmployeeController {
 	public String displayEmployees(Model model) {
 		
 		List<Employee> employees = empService.getAll();
-		List<EmployeeProject> employeesProjectCount = empService.employeeProjects();
+
+		List<EmployeeProject> employeesProjects = empService.employeeProjects();
 		
 		//Passing Employees object (fetching all existing)
-		model.addAttribute("employeesProjectCount", employeesProjectCount);
+		model.addAttribute("employeesProjects", employeesProjects);
 		
 		return "employees/list-employees";
 	}
@@ -53,11 +53,44 @@ public class  EmployeeController {
 			model.addAttribute("employee", employee);
 			return "employees/new-employee";
 		}
-	
-		// Saving data using EmployeeRepository
+
 		empService.save(employee);
-		
+
 		//redirect
 		return "redirect:/employees";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateEmployee(Model model, @Valid Employee employee, BindingResult result) {
+
+		//Validating the email when updating
+		if (!empService.isUniqueEmailOnUpdate(employee)) {
+			result.rejectValue("email", "employee.email", "An account already exists for this email.");
+		}
+
+		if(result.hasErrors()) {
+			model.addAttribute("employee", employee);
+			return "employees/new-employee";
+		}
+
+		empService.update(employee);
+
+		//redirect
+		return "redirect:/employees";
+	}
+
+
+	@GetMapping(value = "/update/{id}")
+	public String displayUpdateEmployeeForm(Model model, @PathVariable Long id) {
+
+		if (!empService.existsById(id)) {
+			return "redirect:/employees";
+		}
+
+		Employee employee = empService.findById(id);
+
+		model.addAttribute("employee", employee);
+
+		return "employees/new-employee";
 	}
 }

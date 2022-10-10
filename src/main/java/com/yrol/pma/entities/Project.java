@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -36,7 +37,7 @@ public class Project {
 	@UniqueProject
 	private String name;
 
-	@NotEmpty
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Stages stage;
 

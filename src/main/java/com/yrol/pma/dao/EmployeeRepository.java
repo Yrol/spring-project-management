@@ -39,8 +39,8 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
 	 * */
 	public List<Employee> findByEmail(String email);
 	
-	@Query(nativeQuery = true, value = "SELECT e.first_name as firstName, e.last_name as lastName, COUNT(pe.employee_id) as projectCount"
+	@Query(nativeQuery = true, value = "SELECT e.employee_id as employeeId, e.first_name as firstName, e.last_name as lastName, COUNT(pe.employee_id) as projectCount"
 			+ " FROM employee e LEFT JOIN project_employee pe ON pe.employee_id = e.employee_id"
-			+ " GROUP BY e.first_name, e.last_name ORDER BY e.last_name DESC")
+			+ " GROUP BY e.employee_id, e.first_name, e.last_name ORDER BY e.last_name DESC")
 	public List<EmployeeProject> employeeProjects();
 }

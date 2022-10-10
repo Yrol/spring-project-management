@@ -67,20 +67,25 @@
 </nav>
 
 <!-- Employees table component -->
-<table class="table" th:fragment="employees-table-component(employeesProjectCount)">
+<table class="table" th:fragment="employees-table-component(employeesProjects, enableEditAndDelete)">
 
 	<thead class="table-striped table-dark">
 		<tr>
 			<th scope="col">First name</th>
 			<th scope="col">Last name</th>
 			<th scope="col">Project Count</th>
+			<th th:if="${enableEditAndDelete}" scope="col">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="empProjCount : ${employeesProjectCount}">
-			<td th:text="${empProjCount.firstName}" />
-			<td th:text="${empProjCount.lastName}" />
-			<td th:text="${empProjCount.projectCount}" />
+		<tr th:each="employee : ${employeesProjects}">
+			<td th:text="${employee.firstName}" />
+			<td th:text="${employee.lastName}" />
+			<td th:text="${employee.projectCount}" />
+			<td th:if="${enableEditAndDelete}" >
+				<a th:href="@{/employees/update/{id}(id=${employee.employeeId})}" class="btn btn-info btn-sm">Update</a>
+				<a th:href="@{/employees/delete(id=${employee.employeeId})}" class="btn btn-danger btn-sm" onclick="if ((!confirm('Ar you sure you want to delete this employee'))) return false">Delete</a>
+			</td>
 		</tr>
 	</tbody>
 </table>

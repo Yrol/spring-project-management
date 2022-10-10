@@ -39,7 +39,7 @@ public class Employee {
 
 	@NotEmpty
 	@Email
-	@UniqueEmployee
+//	@UniqueEmployee
 	@Column(unique = true)
 	private String email;
 	

@@ -33,8 +33,8 @@
 		</table> 
 		-->
 
-		<!-- Method 2: display projects table using a common component -->
-		<table th:replace="layouts :: employees-table-component(${employeesProjectCount})"></table>
+		<!-- Method 2: display projects table using a common component.  Enable edit and delete capabilities by passing boolean values -->
+		<table th:replace="layouts :: employees-table-component(${employeesProjects}, ${true})"></table>
 	</div>
 </body>
 </html>

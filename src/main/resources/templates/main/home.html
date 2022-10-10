@@ -64,8 +64,8 @@
                     </table>
                     -->
 
-					<!-- Method 2: display employees table using a common component defined in layouts.html -->
-					<table th:replace="layouts :: employees-table-component(${employeesProjectCount})"></table>
+					<!-- Method 2: display employees table using a common component defined in layouts.html. Disable edit and delete capabilities by passing boolean values -->
+					<table th:replace="layouts :: employees-table-component(${employeesProjects}, ${false})"></table>
 				</div>
 			</div>
 			<div class="col-4">

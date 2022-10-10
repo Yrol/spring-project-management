@@ -40,7 +40,7 @@ public class HomeController {
 		Map<String, Object> map = new HashMap<>();
 		
 		List<Project> projects = projService.getAll();
-		List<EmployeeProject> employeesProjectCount = empService.employeeProjects();
+		List<EmployeeProject> employeesProjects = empService.employeeProjects();
 		List<ProjectStageCount> projectStageCount = projService.stageCount();
 
 		//converting the projectStageCount to JSON to be used by the home template
@@ -51,7 +51,7 @@ public class HomeController {
 		
 		//Adding the projects
 		model.addAttribute("projects", projects);
-		model.addAttribute("employeesProjectCount", employeesProjectCount);
+		model.addAttribute("employeesProjects", employeesProjects);
 		model.addAttribute("projectStageCount", jsonString);
 
 		model.addAttribute("appVersion", ver);
