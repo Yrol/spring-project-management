@@ -43,6 +43,10 @@ public class EmployeeService {
         return empRepo.findById(id).get();
     }
 
+    public void deleteById(Long id) {
+        empRepo.deleteById(id);
+    }
+
     public boolean existsById(Long id) {
         return empRepo.existsById(id);
     }
@@ -62,6 +66,6 @@ public class EmployeeService {
 
     public boolean isUniqueEmailOnCreate(Employee employee) {
         List<Employee> employees = empRepo.findByEmail(employee.getEmail());
-        return employees.size() > 0;
+        return employees.size() == 0;
     }
 }

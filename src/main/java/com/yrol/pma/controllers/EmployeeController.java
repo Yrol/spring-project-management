@@ -5,6 +5,7 @@ import java.util.List;
 import com.yrol.pma.dto.EmployeeProject;
 import com.yrol.pma.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,6 +50,10 @@ public class  EmployeeController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public String createEmployee(Model model, @Valid Employee employee, BindingResult result) {
 
+		if (!empService.isUniqueEmailOnCreate(employee)) {
+			result.rejectValue("email", "employee.email", "An account already exists for this email.");
+		}
+
 		if(result.hasErrors()) {
 			model.addAttribute("employee", employee);
 			return "employees/new-employee";
@@ -92,5 +97,17 @@ public class  EmployeeController {
 		model.addAttribute("employee", employee);
 
 		return "employees/new-employee";
+	}
+
+	@GetMapping(value = "/delete/{id}")
+	public String delete(@PathVariable Long id) {
+
+		try {
+			empService.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+
+		}
+
+		return "redirect:/employees";
 	}
 }
