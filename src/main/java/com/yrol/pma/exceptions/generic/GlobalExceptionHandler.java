@@ -44,6 +44,9 @@ public class GlobalExceptionHandler {
         return errorResponse;
     }
 
+    /**
+     * Mapping the validation responses thrown from @Valid and @Validate interface used within controllers
+     * */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
