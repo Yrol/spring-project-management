@@ -40,6 +40,7 @@ A simple Project Management app developed using Spring Boot, Thymeleaf and Boots
 
 ---
 ### Web and RESTful endpoints
+Postman collection with payloads can be found in [Postman_collection](https://github.com/Yrol/spring-project-management/tree/master/Postman_collection) directory of the project.
 
 #### Web
 | Feature / page  | URL|
