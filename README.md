@@ -1,5 +1,11 @@
 # Spring Project Management
-A simple Project Management app developed using Spring Boot, Thymeleaf and Bootstrap. 
+A simple Project Management app developed using Spring Boot, Thymeleaf and Bootstrap. Features are as below.
+
+  - User authentication -  Register and login
+  - CRUD operations on employees and projects
+  - UI with Thyemeleaf
+  - RESTful API endpoints
+  - Validation rules
 
 ### Prerequisites
 + **PostgreSQL** has been used for data management. Create a DB called `pma-springbootdb` 
@@ -31,6 +37,41 @@ A simple Project Management app developed using Spring Boot, Thymeleaf and Boots
   
   Click the run button to run the project
   <p><img src="https://i.imgur.com/e0C2POL.png"></p>
+
+---
+### Web and RESTful endpoints
+
+#### Web
+| Feature / page  | URL|
+|---|---|
+|  Register | `http://localhost:<port>/register`  |
+|  Login | `http://localhost:<port>/login`  |
+|  Home | `http://localhost:<port>`  |
+| All employees  | `http://localhost:<port>/employees`  |
+| Create employee  | `http://localhost:<port>/employees/new` |
+| Update employee  | `http://localhost:<port>/employees/update/<id>`  |
+| Delete employee  | `http://localhost:<port>/employees/delete/<id>` |
+| All projects  | `http://localhost:<port>/projects`  |
+| Create project  | `http://localhost:<port>/projects/new`  |
+  
+
+#### REST
+| Feature  | Endpoint| Type | 
+|---|---|---|
+| Create employees  | `http://localhost:<port>/app-api/employees`  | POST |
+| All employees  | `http://localhost:<port>/app-api/employees`  | GET |
+| All employees paginated | `http://localhost:<port>/app-api/employees?page=<page>&size=<size>`  | GET |
+| Employee by ID  | `http://localhost:<port>/app-api/employees/<id>`  | GET |
+| Delete employee by ID  | `http://localhost:<port>/app-api/employees/<id>`  | DELETE |
+| Update employee | `http://localhost:<port>/app-api/employees/<id>`  | PATCH |
+||||
+| Create project  | `http://localhost:<port>/app-api/projects`  | POST |
+| All projects  | `http://localhost:<port>/app-api/projects`  | GET |
+| All projects paginated | `http://localhost:<port>/app-api/projects?page=<page>&size=<size>`  | GET |
+| Project by ID  | `http://localhost:<port>/app-api/projects/<id>`  | GET |
+| Delete project by ID  | `http://localhost:<port>/app-api/projects/<id>`  | DELETE |
+| Update project | `http://localhost:<port>/app-api/projects/<id>`  | PATCH |
+
 
 ---
 ### Building and running the project in Docker
