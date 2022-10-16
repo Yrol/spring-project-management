@@ -108,6 +108,48 @@ public class ProjectRestControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
+    @Test
+    public void it_will_validate_mandatory_field_project_name() throws Exception {
+        createNewProject(new Project("", Stages.INPROGRESS, "The Honda Project"))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
+    @Test
+    public void it_will_not_allow_to_create_duplicate_projects() throws Exception {
+
+        //project 1
+        createNewProject(new Project("Tesla", Stages.INPROGRESS, "The Tesla Project 1"))
+                .andExpect(MockMvcResultMatchers.status().isCreated());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/app-api/projects"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.size()", CoreMatchers.is(1)));
+
+        // project 2
+        createNewProject(new Project("Tesla", Stages.INPROGRESS, "The Tesla Project 1"))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
+    @Test
+    public void it_will_not_allow_to_duplicate_projects_when_editing() throws Exception {
+
+        //project 1
+        createNewProject(new Project("Kenwood", Stages.INPROGRESS, "The Kenwood Project"))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.projectId").value(1));
+
+        //project 2
+        createNewProject(new Project("Sony", Stages.INPROGRESS, "The Sony Project"))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.projectId").value(2));
+
+        //Editing project 1 using an existing project name
+        mockMvc.perform(MockMvcRequestBuilders.patch("/app-api/projects/{id}", 1)
+                        .content(asJsonString(new Project("Sony", Stages.COMPLETED, "The Kenwood Project")))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

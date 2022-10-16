@@ -94,7 +94,6 @@ public class EmployeesRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("r.silva@msn.com"));
     }
 
-
     @Test
     public void it_allows_to_delete_existing_employees () throws Exception {
         ResultActions projectCreate = createNewEmployee(new Employee("Desmond", "Pereira", "d.pereira@aol.com"));
@@ -110,6 +109,58 @@ public class EmployeesRestControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
+    @Test
+    public void it_will_validate_mandatory_field_employee_firstName() throws Exception {
+        ResultActions projectCreate = createNewEmployee(new Employee("", "Robins", "s.robins@yahoo.com"));
+        projectCreate.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
+    @Test
+    public void it_will_validate_mandatory_field_employee_lastName() throws Exception {
+        ResultActions projectCreate = createNewEmployee(new Employee("Simon", "", "s.robins@yahoo.com"));
+        projectCreate.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
+    @Test
+    public void it_will_validate_mandatory_field_employee_email() throws Exception {
+        ResultActions projectCreate = createNewEmployee(new Employee("Simon", "Robins", "This is not an email"));
+        projectCreate.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
+    @Test
+    public void it_will_not_allow_to_create_multiple_employees_with_same_email() throws Exception {
+
+        //Employee 1
+        createNewEmployee(new Employee("Dave", "McDonald", "d.mcdonald@msn.com"))
+                .andExpect(MockMvcResultMatchers.status().isCreated());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/app-api/employees"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.size()", CoreMatchers.is(1)));
+
+        //Employee 2
+        createNewEmployee(new Employee("Aaron", "Finch", "d.mcdonald@msn.com"))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
+    @Test
+    public void it_will_not_allow_to_duplicate_employee_when_editing_using_same_email() throws Exception {
+
+        //Employee 1
+        createNewEmployee(new Employee("Kelly", "Johnson", "k.johnson@skunk.com"))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employeeId").value(1));
+
+        //Employee 2
+        createNewEmployee(new Employee("Ian", "Thomas", "i.thomas@gmail.com"))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employeeId").value(2));
+
+        mockMvc.perform(MockMvcRequestBuilders.patch("/app-api/employees/{id}", 1)
+                        .content(asJsonString(new Employee("Kelly", "Johnson", "i.thomas@gmail.com")))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
 
     public static String asJsonString(final Object obj) {
         try {

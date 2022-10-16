@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -44,7 +45,7 @@ public class ProjectApiController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Project> createProject(@RequestBody Project project) throws InvalidProjectNameException {
+    public ResponseEntity<Project> createProject(@RequestBody @Valid Project project) throws InvalidProjectNameException {
 
         if (!projService.isUniqueProjectOnCreate(project)) {
             throw new InvalidProjectNameException();
@@ -54,7 +55,7 @@ public class ProjectApiController {
     }
 
     @PatchMapping(path = "/{id}", consumes = "application/json")
-    public ResponseEntity<Project> partialUpdateProject(@PathVariable("id") Long id, @RequestBody Project patchProject) throws NoRecordFoundException, InvalidProjectNameException {
+    public ResponseEntity<Project> partialUpdateProject(@PathVariable("id") Long id, @RequestBody @Valid Project patchProject) throws NoRecordFoundException, InvalidProjectNameException {
 
         if (!projService.existsById(id)) {
             throw new NoRecordFoundException();

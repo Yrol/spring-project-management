@@ -34,7 +34,7 @@ public class Project {
 	@NotEmpty
 	@Column(unique = true)
 	@Size(min = 2, max = 50, message = "{Size.Project.name}")
-	@UniqueProject
+//	@UniqueProject
 	private String name;
 
 	@NotNull
