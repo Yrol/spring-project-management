@@ -4,6 +4,7 @@ import com.yrol.pma.entities.Project;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -11,8 +12,10 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
 
 @SpringBootTest
+@DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 public class ProjectAnnotation {
 
     @Autowired
@@ -27,20 +30,19 @@ public class ProjectAnnotation {
     @Test
     public void project_name_must_be_2_and_50_characters() {
 
+        Project project =  new Project();
+
         // Less than 2
-        Project firstProject =  new Project();
-        firstProject.setName("T");
-        assertEquals("The Project name must be between 2 and 50 characters.", getValidatorMessage(firstProject, "name"));
+        project.setName("T");
+        assertEquals("The Project name must be between 2 and 50 characters.", getValidatorMessage(project, "name"));
 
         // More than 50
-        Project secondProject =  new Project();
-        secondProject.setName("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's");
-        assertEquals("The Project name must be between 2 and 50 characters.", getValidatorMessage(secondProject, "name"));
+        project.setName("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's");
+        assertEquals("The Project name must be between 2 and 50 characters.", getValidatorMessage(project, "name"));
 
         // Valid project name
-        Project thirdProject = new Project();
-        thirdProject.setName("Toyota");
-        Set<ConstraintViolation<Project>> violations = validator.validate(thirdProject);
+        project.setName("Toyota");
+        Set<ConstraintViolation<Project>> violations = validator.validate(project);
         assertFalse(violations.isEmpty());
     }
 
