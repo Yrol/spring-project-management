@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 /**
  * Marking the Project as an Entity. Hence, Sprint Boot will create a table in
  * The DB for Project with the required fields
- * Using Lombok functions - @Data, @AllArgsConstructor and @NoArgsConstructor to remove boilerplate setters, getters and constructors.
+ * Using Lombok functions - @Data, @AllArgsConstructor and @NoArgsConstructor to remove boilerplate setters, getters and constructors (handle them automatically).
  */
 
 @Data
@@ -82,54 +82,15 @@ public class Project {
 	@JoinTable(name="project_employee", joinColumns =@JoinColumn(name="project_id"), inverseJoinColumns = @JoinColumn(name="employee_id"))
 	@JsonIgnore
 	private List<Employee> employees;
-	
 
-	public List<Employee> getEmployees() {
-		return employees;
-	}
 
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
-	}
-
+	// Custom constructor without ID param
 	public Project(String name, Stages stage, String description) {
 		super();
 		this.name = name;
 		this.stage = stage;
 		this.description = description;
 	}
-
-//	public long getProjectId() {
-//		return projectId;
-//	}
-//
-//	public void setProjectId(long projectId) {
-//		this.projectId = projectId;
-//	}
-//
-//	public String getName() {
-//		return name;
-//	}
-//
-//	public void setName(String name) {
-//		this.name = name;
-//	}
-//
-//	public Stages getStage() {
-//		return stage;
-//	}
-//
-//	public void setStage(Stages stage) {
-//		this.stage = stage;
-//	}
-//
-//	public String getDescription() {
-//		return description;
-//	}
-//
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
 	
 	/**
 	 * Convenience method used for seeding & etc.

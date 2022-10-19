@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 /**
  * Marking the Employee as an Entity. Hence, Sprint Boot will create a table in
  * The DB for Employee with the required fields
- * Using Lombok functions - @Data, @AllArgsConstructor and @NoArgsConstructor to remove boilerplate setters and getters and constructors.
+ * Using Lombok functions - @Data, @AllArgsConstructor and @NoArgsConstructor to remove boilerplate setters, getters and constructors (handle them automatically).
  */
 @Entity
 @Data
@@ -77,67 +77,11 @@ public class Employee {
 	@JsonIgnore
 	public List<Project> theProjects;
 
-//	public List<Project> getTheProjects() {
-//		return theProjects;
-//	}
-//
-//	public void setTheProjects(List<Project> theProjects) {
-//		this.theProjects = theProjects;
-//	}
-
-	
-	
-//	private Project theProject;
-//	
-//	public Project getTheProject() {
-//		return theProject;
-//	}
-//
-//	public void setTheProject(Project theProject) {
-//		this.theProject = theProject;
-//	}
-
-//	public Employee() {
-//
-//	}
-//
+	// Custom constructor without ID param
 	public Employee(String firstName, String lastName, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 	}
-//
-//
-//	public long getEmployeeId() {
-//		return employeeId;
-//	}
-//
-//	public void setEmployeeId(long employeeId) {
-//		this.employeeId = employeeId;
-//	}
-//
-//	public String getFirstName() {
-//		return firstName;
-//	}
-//
-//	public void setFirstName(String firstName) {
-//		this.firstName = firstName;
-//	}
-//
-//	public String getLastName() {
-//		return lastName;
-//	}
-//
-//	public void setLastName(String lastName) {
-//		this.lastName = lastName;
-//	}
-//
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
 }
