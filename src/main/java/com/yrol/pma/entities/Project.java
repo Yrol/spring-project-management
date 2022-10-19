@@ -3,6 +3,9 @@ package com.yrol.pma.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yrol.pma.enums.projects.Stages;
 import com.yrol.pma.validation.projects.UniqueProject;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +17,13 @@ import javax.validation.constraints.Size;
 
 /**
  * Marking the Project as an Entity. Hence, Sprint Boot will create a table in
- * the DB for Project with the required fields
+ * The DB for Project with the required fields
+ * Using Lombok functions - @Data, @AllArgsConstructor and @NoArgsConstructor to remove boilerplate setters, getters and constructors.
  */
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Project {
 
@@ -84,10 +92,6 @@ public class Project {
 		this.employees = employees;
 	}
 
-	public Project() {
-
-	} 
-
 	public Project(String name, Stages stage, String description) {
 		super();
 		this.name = name;
@@ -95,37 +99,37 @@ public class Project {
 		this.description = description;
 	}
 
-	public long getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(long projectId) {
-		this.projectId = projectId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Stages getStage() {
-		return stage;
-	}
-
-	public void setStage(Stages stage) {
-		this.stage = stage;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+//	public long getProjectId() {
+//		return projectId;
+//	}
+//
+//	public void setProjectId(long projectId) {
+//		this.projectId = projectId;
+//	}
+//
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//
+//	public Stages getStage() {
+//		return stage;
+//	}
+//
+//	public void setStage(Stages stage) {
+//		this.stage = stage;
+//	}
+//
+//	public String getDescription() {
+//		return description;
+//	}
+//
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
 	
 	/**
 	 * Convenience method used for seeding & etc.

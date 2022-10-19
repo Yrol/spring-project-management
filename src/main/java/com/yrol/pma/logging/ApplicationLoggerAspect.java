@@ -59,7 +59,7 @@ public class ApplicationLoggerAspect {
         log.debug("\n \n \n");
         log.debug("******** Before Method Execution ********* \n {} --> {} with argument[s] = {}",
                 jp.getSignature().getDeclaringTypeName(),
-                jp.getSignature().getName(), Arrays.toString(jp.getArgs()));
+                jp.getSignature().getName());
         log.debug("______________________________________________ \n \n \n");
 
         Object jpo = null;
@@ -74,7 +74,7 @@ public class ApplicationLoggerAspect {
         log.debug("\n \n \n");
         log.debug("******** After Method Execution ********* \n {} --> {} with argument[s] = {}",
                 jp.getSignature().getDeclaringTypeName(),
-                jp.getSignature().getName(), Arrays.toString(jp.getArgs()));
+                jp.getSignature().getName());
         log.debug("______________________________________________ \n \n \n");
 
         return jpo;
