@@ -93,41 +93,18 @@ The DB schemas are located in `/docker/docker-sources/postgres/dbscripts/` direc
 ---
 
 
-### Creating Artifacts / JAR file in IntelliJ and running project locally
+### Package and run project as a JAR file
 
-+ **Step 1:** File &rarr; Project Structure
-  <p><img src="https://i.imgur.com/rTo35dE.png"></img></p>
-
-+ **Step 2:** Add (+) &rarr; JAR &rarr; From modules with dependencies
-  <p><img src="https://i.imgur.com/auX21p8.png"></img></p>
-
-+ **Step 3:** Create JAR from Modules
-  - Module: project-management
-  - Main Class: `com.yrol.pma.ProjectManagementApplication`
-  - JAR files from libraries: copy to output directory and link via manifest
-  <p><img src="https://i.imgur.com/H8zsmZw.png"></img></p>
- 
-+ **Step 4:** Project Structure
-  - Name: project-management:jar
-  - Type: Other
-  - Include in project build: &#9745;
-  - Apply & ok
-  <p><img src="https://i.imgur.com/X8Lp26W.png"></img></p>
++ **Step 1:** Building the project.
+  <p>In the Maven tab, select `clean` and `install` options and click on `Run Maven Build` option. JAR file will be created in the `taeget` directory.</p>  
+  <p><img src="https://i.imgur.com/7bTEO6z.png"></img></p>
+      
++ **Step 2: Running the project using JAR:**
+  <p>Once the project is build and JAR is generated successfully, expand the `target` folder and run the project.</p>
+   <p><img src="https://i.imgur.com/fHHskQi.png"></img></p>
   
- + **Step 5:** Build &rarr; Build Artifacts.... Then select Build.
-    <p><img src="https://i.imgur.com/mwwzG02.png"></img></p>
-    <p><img src="https://i.imgur.com/oDGVJv3.png"></img></p>
-    
-    Notice: Once this step is completed, the Artifacts folder should have the folders resources generated along with `project-management.jar`.
-    <p><img src="https://i.imgur.com/vGB2d1P.png"></img></p>
-    
- + **Running the artifact:**
-    - Go to the directory: out &rarr; artifacts &rarr; project_management_jar
-    - Run the command: `java -jar project-management.jar`
 
-    Or select and run the `project-management.jar` file directly from IntelliJ.
-    
-    The Project should run in `http://localhost:8080/`
-    
+  The Project should run in `http://localhost:8080/`
+
  
    
